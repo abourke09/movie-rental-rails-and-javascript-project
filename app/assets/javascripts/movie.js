@@ -1,6 +1,9 @@
 $(function (){
 
+  listenForMovieClick()
 
-
-  
 })
+
+function listenForMovieClick() {
+  
+}
