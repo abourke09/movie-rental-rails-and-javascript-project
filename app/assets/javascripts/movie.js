@@ -5,5 +5,9 @@ $(function (){
 })
 
 function listenForMovieClick() {
+  $('td a').on('click', function (event) {
 
+    event.preventDefault();
+
+  })
 }
