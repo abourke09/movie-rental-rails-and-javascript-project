@@ -22,7 +22,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     respond_to do |f|
       f.html {render :show}
-      f.json {render json: @movie, include: "famous_quotes"}
+      f.json {render json: @movie}
     end
   end
 
