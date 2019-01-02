@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
       @movies = Movie.rating_filter(params[:rating])
       respond_to do |f|
         f.html {render :index}
-        f.json {renger json: @movies}
+        f.json {render json: @movies}
       end
     else
       @movies = Movie.all
