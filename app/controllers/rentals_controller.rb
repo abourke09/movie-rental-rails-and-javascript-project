@@ -1,6 +1,11 @@
 class RentalsController < ApplicationController
   before_action :no_url_hacking, only: [:index]
 
+  def show
+    @rental = Rental.find(params[:id])
+    render json: @rental, status: 200
+  end
+
   def index
     if params[:customer_id]
       @customer = Customer.find_by(id: params[:customer_id])

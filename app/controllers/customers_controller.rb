@@ -5,6 +5,10 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @customer}
+    end
   end
 
   def new

@@ -3,5 +3,4 @@ class RentalSerializer < ActiveModel::Serializer
 
   belongs_to :movie
   belongs_to :customer
-  has_many :famous_quotes, through: :movie 
 end

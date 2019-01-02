@@ -21,7 +21,6 @@ function listenForMovieClick() {
         $('div#movie-details').html(html)
       }
     })
-
     event.preventDefault();
 
   })
@@ -29,6 +28,7 @@ function listenForMovieClick() {
 
 class Movie {
   constructor(obj) {
+
     this.id = obj.id
     this.title = obj.attributes.title
     this.lead_actor = obj.attributes["lead-actor"]

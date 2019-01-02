@@ -1,4 +1,8 @@
 class FamousQuotesController < ApplicationController
+  def show
+    @famous_quote = FamousQuote.find(params[:id])
+    render json: @famous_quote, status: 200
+  end
 
   def new
     @movie = Movie.find_by(id: params[:movie_id])
