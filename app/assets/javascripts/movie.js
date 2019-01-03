@@ -1,5 +1,5 @@
 $(function (){
-  console.log('Congrats, youve successfully loaded the movie.js file');
+  console.log('Yay! movie.js loaded.');
   listenForMovieClick()
 
 })
@@ -7,21 +7,29 @@ $(function (){
 function listenForMovieClick() {
   $('td a').on('click', function (event) {
 
+    event.preventDefault();
+
     $.ajax({
       url: this.href,
       method: 'get',
       dataType: 'json',
       success: function (response) {
-        console.log("response: ", response);
 
-        let movie = new Movie(response.data);
-        console.log("newMovieData: ", movie);
+        let movie = new Movie(response);
+        console.log("This is a movie: ", movie);
 
         let html = movie.movieHTML()
         $('div#movie-details').html(html)
+
+        $('div#famous-quote-details').html(`<h2>Famous Quotes</h2>`)
+
+        movie.famous_quotes.forEach(q => {
+          let each_quote = `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
+          $('div#famous-quote-details').append(each_quote)
+          })
+
       }
     })
-    event.preventDefault();
 
   })
 }
@@ -30,10 +38,11 @@ class Movie {
   constructor(obj) {
 
     this.id = obj.id
-    this.title = obj.attributes.title
-    this.lead_actor = obj.attributes["lead-actor"]
-    this.length = obj.attributes.length
-    this.rating = obj.attributes.rating
+    this.title = obj.title
+    this.lead_actor = obj.lead_actor
+    this.length = obj.length
+    this.rating = obj.rating
+    this.famous_quotes = obj.famous_quotes
   }
 }
 
