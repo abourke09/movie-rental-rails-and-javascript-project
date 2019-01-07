@@ -7,8 +7,6 @@ $(function (){
 function listenForMovieClick() {
   $('td a').on('click', function (event) {
 
-    event.preventDefault();
-
     $.ajax({
       url: this.href,
       method: 'get',
@@ -16,9 +14,9 @@ function listenForMovieClick() {
       success: function (response) {
 
         let movie = new Movie(response);
-        console.log("This is a movie: ", movie);
+      //  console.log("This is a movie: ", movie);
 
-        let html = movie.movieHTML()
+        let html = movie.movieHTML();
         $('div#movie-details').html(html)
 
         $('div#famous-quote-details').html(`<h2>Famous Quotes</h2>`)
@@ -28,8 +26,13 @@ function listenForMovieClick() {
           $('div#famous-quote-details').append(each_quote)
           })
 
+        let button = `<p>ISABUTTON!</p>`;
+
+        $('div#rent-movie-button').html(button)
+
       }
     })
+    event.preventDefault();
 
   })
 }
@@ -52,5 +55,12 @@ Movie.prototype.movieHTML = function () {
     <p><strong>MPAA Rating: </strong>${this.rating} </p>
     <p><strong>Length: </strong>${this.length} minutes</p>
     <p><strong>Lead Actor: </strong>${this.lead_actor} </p>
+
+    <form method="post" action="/rentals">
+      <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+      <%= tag(:input, :type => "hidden", :name => :customer_id, :value => current_user.id) %>
+      <%= tag(:input, :type => "hidden", :name => :movie_id, :value => @movie.id) %>
+      <input type="submit" value="Rent Movie">
+    </form>
     `)
 }
