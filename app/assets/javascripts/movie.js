@@ -32,6 +32,7 @@ function listenForMovieClick() {
 
       }
     })
+
     event.preventDefault();
 
   })
@@ -57,10 +58,7 @@ Movie.prototype.movieHTML = function () {
     <p><strong>Lead Actor: </strong>${this.lead_actor} </p>
 
     <form method="post" action="/rentals">
-      <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
-      <%= tag(:input, :type => "hidden", :name => :customer_id, :value => current_user.id) %>
-      <%= tag(:input, :type => "hidden", :name => :movie_id, :value => @movie.id) %>
-      <input type="submit" value="Rent Movie">
+      <input type="submit" id="${this.id}" value="Rent Movie">
     </form>
     `)
 }
