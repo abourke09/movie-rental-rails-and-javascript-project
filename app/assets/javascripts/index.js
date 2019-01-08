@@ -1,7 +1,6 @@
 $(function (){
   console.log('Yay! index.js loaded.');
   listenForNavClick()
-  listenForMovieClick()
 
 })
 
@@ -13,7 +12,29 @@ function clearWhiteboard() {
   $('div#whiteboard').html('')
 }
 
+function movieNavClick() {
+  console.log("you clicked on the All Movies link!")
+}
 
+function profileNavClick() {
+  console.log("you clicked on the My Profile link!")
+}
+
+function rentalsNavClick() {
+  console.log("you clicked on the My Rentals link!")
+}
+
+function logOutNavClick() {
+  console.log("you clicked on the Log Out link!")
+}
+
+function signUpNavClick() {
+  console.log("you clicked on the Sign Up link!")
+}
+
+function logInNavClick() {
+  console.log("you clicked on the Log In link!")
+}
 
 //I need to hijack the click event for each of my nav links
 function listenForNavClick() {
@@ -72,29 +93,4 @@ function listenForMovieClick() {
     event.preventDefault();
 
   })
-}
-
-class Movie {
-  constructor(obj) {
-
-    this.id = obj.id
-    this.title = obj.title
-    this.lead_actor = obj.lead_actor
-    this.length = obj.length
-    this.rating = obj.rating
-    this.famous_quotes = obj.famous_quotes
-  }
-}
-
-Movie.prototype.movieHTML = function () {
-  return (`
-    <h1>${this.title}</h1>
-    <p><strong>MPAA Rating: </strong>${this.rating} </p>
-    <p><strong>Length: </strong>${this.length} minutes</p>
-    <p><strong>Lead Actor: </strong>${this.lead_actor} </p>
-
-    <form method="post" action="/rentals">
-      <input type="submit" id="${this.id}" value="Rent Movie">
-    </form>
-    `)
 }
