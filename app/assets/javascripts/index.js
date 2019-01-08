@@ -12,6 +12,14 @@ function clearWhiteboard() {
   $('div#whiteboard').html('')
 }
 
+//I need to hijack the click event for each of my nav links
+function listenForNavClick() {
+  $('a.navbar-brand').on('click', function (event) {
+    event.preventDefault();
+    console.log("Navbar click event:", event);
+  })
+}
+
 function listenForMovieClick() {
   $('td a').on('click', function (event) {
 
