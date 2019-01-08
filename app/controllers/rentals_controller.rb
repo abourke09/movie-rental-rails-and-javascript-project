@@ -4,6 +4,10 @@ class RentalsController < ApplicationController
   def show
     @rental = Rental.find(params[:id])
     render json: @rental, status: 200
+    #respond_to do |f|
+    #  f.html {render :show}
+    #  f.json {render json: @rental}
+    #end
   end
 
   def index
