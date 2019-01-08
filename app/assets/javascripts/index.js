@@ -1,5 +1,6 @@
 $(function (){
   console.log('Yay! index.js loaded.');
+  listenForNavClick()
   listenForMovieClick()
 
 })
@@ -12,11 +13,30 @@ function clearWhiteboard() {
   $('div#whiteboard').html('')
 }
 
+
+
 //I need to hijack the click event for each of my nav links
 function listenForNavClick() {
   $('a.navbar-brand').on('click', function (event) {
     event.preventDefault();
-    console.log("Navbar click event:", event);
+  //  console.log("Navbar click event:", event);
+    clearWhiteboard()
+    let link = event.delegateTarget.outerText
+
+    if (link == "All Movies") {
+      movieNavClick()
+    } else if (link == "My Profile") {
+      profileNavClick()
+    } else if (link == "My Rentals") {
+      rentalsNavClick()
+    } else if (link == "Log Out") {
+      logOutNavClick()
+    } else if (link == "Sign Up") {
+      signUpNavClick()
+    } else if (link == "Log In") {
+      logInNavClick()
+    }
+
   })
 }
 
