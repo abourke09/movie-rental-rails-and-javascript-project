@@ -1,5 +1,11 @@
 Notes.md
 
+${this.famous_quotes}.forEach(q => {
+  let each_quote = `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
+  $('div#famous-quote-details').append(each_quote)
+  })
+
+
 
 //  const movieLinks = document.querySelectorAll('td a')
 //	movieLinks.forEach(link => {
