@@ -22,3 +22,16 @@ Movie.prototype.movieHTML = function () {
     </form>
     `)
 }
+
+Movie.prototype.movieList = function () {
+  return (`
+        <tr>
+          <td><a href="movies/${this.id}">${this.id}. ${this.title}</a></td>
+          <td>${this.rating}</td>
+          <td>${this.length} minutes</td>
+          <td>${this.lead_actor}</td>
+        </tr>
+  `)
+}
+
+// <td><%= link_to movie.title, movie_path(movie.id) %></td>
