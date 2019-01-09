@@ -1,42 +1,69 @@
 $(function (){
   console.log('Yay! index.js loaded.');
   listenForNavClick()
-
+//  listenForMovieClick()
 })
 
-function clearWelcomeMessage() {
-  $('div#welcome-message').html('')
+function clearHomepage() {
+  $('div#homepage').html('')
 }
 
 function clearWhiteboard() {
   $('div#whiteboard').html('')
 }
 
-function movieNavClick() {
-  console.log("you clicked on the All Movies link!")
+function moviesNavClick(event) {
+  $('div#whiteboard').html(`
+    <h3>All Movies: (add filter later)</h3>
+    <table>
+      <tbody>
+        <tr>
+          <th>Title</th>
+          <th>MPAA Rating</th>
+          <th>Length</th>
+          <th>Lead Actor</th>
+        </tr>
+      </tbody>
+    </table>
+    <div id='movie-details'></div>
+    <div id='famous-quote-details'></div>
+    <div id='rent-movie-button'></div>
+  `);
+
+  $.ajax({
+    url: event.delegateTarget.href,
+    method: 'get',
+    dataType: 'json',
+    success: function (response) {
+      response.forEach(item => {
+        let newMovie = new Movie(item)
+        $('div#whiteboard tbody').append(newMovie.movieList())
+      })
+      listenForMovieClick()
+    }
+  })
 }
 
 function profileNavClick() {
-  console.log("you clicked on the My Profile link!")
+  $('div#whiteboard').append("you clicked on the My Profile link!")
 }
 
 function rentalsNavClick() {
-  console.log("you clicked on the My Rentals link!")
+  $('div#whiteboard').append("you clicked on the My Rentals link!")
 }
 
 function logOutNavClick() {
-  console.log("you clicked on the Log Out link!")
+  $('div#whiteboard').append("you clicked on the Log Out link!")
 }
 
 function signUpNavClick() {
-  console.log("you clicked on the Sign Up link!")
+  $('div#whiteboard').append("you clicked on the Sign Up link!")
 }
 
 function logInNavClick() {
-  console.log("you clicked on the Log In link!")
+  $('div#whiteboard').append("you clicked on the Log In link!")
 }
 
-//I need to hijack the click event for each of my nav links
 function listenForNavClick() {
   $('a.navbar-brand').on('click', function (event) {
     event.preventDefault();
@@ -45,7 +72,7 @@ function listenForNavClick() {
     let link = event.delegateTarget.outerText
 
     if (link == "All Movies") {
-      movieNavClick()
+      moviesNavClick(event)
     } else if (link == "My Profile") {
       profileNavClick()
     } else if (link == "My Rentals") {
@@ -61,36 +88,30 @@ function listenForNavClick() {
   })
 }
 
+
 function listenForMovieClick() {
+  console.log("BAHAHAHA!")
   $('td a').on('click', function (event) {
-
-    $.ajax({
-      url: this.href,
-      method: 'get',
-      dataType: 'json',
-      success: function (response) {
-
-        let movie = new Movie(response);
-      //  console.log("This is a movie: ", movie);
-
-        let html = movie.movieHTML();
-        $('div#movie-details').html(html)
-
-        $('div#famous-quote-details').html(`<h2>Famous Quotes</h2>`)
-
-        movie.famous_quotes.forEach(q => {
-          let each_quote = `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
-          $('div#famous-quote-details').append(each_quote)
-          })
-
-        let button = `<p>ISABUTTON!</p>`;
-
-        $('div#rent-movie-button').html(button)
-
+    event.preventDefault();
+    console.log("well this worked alright...")
+    
+  $.ajax({
+    url: this.href,
+    method: 'get',
+    dataType: 'json',
+    success: function (response) {
+      let movie = new Movie(response);
+      let html = movie.movieHTML();
+      $('div#movie-details').html(html)
+      $('div#famous-quote-details').html(`<h2>Famous Quotes</h2>`)
+      movie.famous_quotes.forEach(q => {
+        let each_quote = `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
+        $('div#famous-quote-details').append(each_quote)
+        })
+      let button = `<p>ISABUTTON!</p>`;
+      $('div#rent-movie-button').html(button)
       }
     })
-
-    event.preventDefault();
 
   })
 }
