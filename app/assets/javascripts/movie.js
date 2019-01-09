@@ -39,4 +39,69 @@ Movie.prototype.movieList = function () {
   `)
 }
 
-// <td><%= link_to movie.title, movie_path(movie.id) %></td>
+function moviesNavClick(event) {
+  $('div#whiteboard').html(`
+    <h1>All Movies: (add filter later)</h1>
+    <table>
+      <tbody>
+        <tr>
+          <th>Title</th>
+          <th>MPAA Rating</th>
+          <th>Length</th>
+          <th>Lead Actor</th>
+        </tr>
+      </tbody>
+    </table>
+    <div id='movie-details'></div>
+  `);
+
+  $.ajax({
+    url: event.delegateTarget.href,
+    method: 'get',
+    dataType: 'json',
+    success: function (response) {
+      response.forEach(item => {
+        let newMovie = new Movie(item)
+        $('div#whiteboard tbody').append(newMovie.movieList())
+      })
+      listenForMovieClick()
+    }
+  })
+}
+
+function listenForMovieClick() {
+  $('td a').on('click', function (event) {
+    event.preventDefault();
+
+  $.ajax({
+    url: this.href,
+    method: 'get',
+    dataType: 'json',
+    success: function (response) {
+      let movie = new Movie(response);
+      let html = movie.movieHTML();
+      $('div#movie-details').html(html)
+
+      movie.famous_quotes.forEach(q => {
+        let each_quote = `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
+        $('div#movie-details').append(each_quote)
+      })
+
+      let button = movie.rentButton
+      $('div#movie-details').append(button)
+      listenForRentClick()
+      }
+    })
+
+  })
+}
+
+function listenForRentClick() {
+  $('input#movie-details').on('click', function (event) {
+    event.preventDefault();
+    console.log("Rent button click event:", event);
+    //After movie is rented,  it should be added to the customer's rentals (in the database)
+    //and the whiteboard should fill with the customer's Rentals info
+    rentalsNavClick()
+  })
+}
