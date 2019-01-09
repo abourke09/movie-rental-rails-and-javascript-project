@@ -14,7 +14,7 @@ function clearWhiteboard() {
 
 function moviesNavClick(event) {
   $('div#whiteboard').html(`
-    <h3>All Movies: (add filter later)</h3>
+    <h1>All Movies: (add filter later)</h1>
     <table>
       <tbody>
         <tr>
@@ -26,7 +26,6 @@ function moviesNavClick(event) {
       </tbody>
     </table>
     <div id='movie-details'></div>
-    <div id='famous-quote-details'></div>
     <div id='rent-movie-button'></div>
   `);
 
@@ -94,7 +93,7 @@ function listenForMovieClick() {
   $('td a').on('click', function (event) {
     event.preventDefault();
     console.log("well this worked alright...")
-    
+
   $.ajax({
     url: this.href,
     method: 'get',
@@ -103,13 +102,14 @@ function listenForMovieClick() {
       let movie = new Movie(response);
       let html = movie.movieHTML();
       $('div#movie-details').html(html)
-      $('div#famous-quote-details').html(`<h2>Famous Quotes</h2>`)
+
       movie.famous_quotes.forEach(q => {
         let each_quote = `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
-        $('div#famous-quote-details').append(each_quote)
-        })
-      let button = `<p>ISABUTTON!</p>`;
-      $('div#rent-movie-button').html(button)
+        $('div#movie-details').append(each_quote)
+      })
+
+      let button = movie.rentButton
+      $('div#movie-details').append(button)
       }
     })
 

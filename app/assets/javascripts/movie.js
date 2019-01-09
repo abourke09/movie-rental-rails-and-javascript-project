@@ -12,11 +12,16 @@ class Movie {
 
 Movie.prototype.movieHTML = function () {
   return (`
-    <h1>${this.title}</h1>
+    <h2>${this.title}</h2>
     <p><strong>MPAA Rating: </strong>${this.rating} </p>
     <p><strong>Length: </strong>${this.length} minutes</p>
     <p><strong>Lead Actor: </strong>${this.lead_actor} </p>
+    <p><strong>Famous Quotes</strong></p>
+    `)
+}
 
+Movie.prototype.rentButton = function () {
+  return (`
     <form method="post" action="/rentals">
       <input type="submit" id="${this.id}" value="Rent Movie">
     </form>
