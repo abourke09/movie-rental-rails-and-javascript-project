@@ -23,11 +23,6 @@ function profileNavClick() {
   $('div#whiteboard').append("you clicked on the My Profile link!")
 }
 
-function rentalsNavClick() {
-  clearWhiteboard()
-  $('div#whiteboard').append("you clicked on the My Rentals link!")
-}
-
 function logOutNavClick() {
   $('div#whiteboard').append("you clicked on the Log Out link!")
 }
@@ -54,7 +49,7 @@ function listenForNavClick() {
     } else if (link == "My Profile") {
       profileNavClick()
     } else if (link == "My Rentals") {
-      rentalsNavClick()
+      rentalsNavClick(event)
     } else if (link == "Log Out") {
       logOutNavClick()
     } else if (link == "Sign Up") {

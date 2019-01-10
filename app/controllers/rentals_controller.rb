@@ -1,13 +1,14 @@
 class RentalsController < ApplicationController
   before_action :no_url_hacking, only: [:index]
+#  skip_before_action :verify_authenticity_token 
 
   def show
     @rental = Rental.find(params[:id])
-    render json: @rental, status: 200
-    #respond_to do |f|
-    #  f.html {render :show}
-    #  f.json {render json: @rental}
-    #end
+  #  render json: @rental, status: 200
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @rental}
+    end
   end
 
   def index
@@ -18,6 +19,10 @@ class RentalsController < ApplicationController
       else
         @checked_out = @customer.rentals.checked_out
         @past_rentals = @customer.rentals.past_rentals
+        respond_to do |f|
+          f.html {render :index}
+          f.json {render json: @customer}
+        end
       end
     else
       redirect_to "/"
@@ -25,6 +30,7 @@ class RentalsController < ApplicationController
   end
 
   def create
+    binding.pry
     @rental = Rental.create(
           :customer_id => params[:customer_id],
           :movie_id => params[:movie_id]
