@@ -1,6 +1,5 @@
 $(function (){
   listenForNavClick()
-//  listenForMovieClick()
 })
 
 function clearHomepage() {
@@ -17,10 +16,6 @@ function homeNavClick(event) {
     <h1>Movie Rental Homepage</h1>
     <p>Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>
     `)
-}
-
-function profileNavClick() {
-  $('div#whiteboard').append("you clicked on the My Profile link!")
 }
 
 function logOutNavClick() {
@@ -47,15 +42,15 @@ function listenForNavClick() {
     } else if (link == "All Movies") {
       moviesNavClick(event)
     } else if (link == "My Profile") {
-      profileNavClick()
+      profileNavClick(event)
     } else if (link == "My Rentals") {
       rentalsNavClick(event)
     } else if (link == "Log Out") {
-      logOutNavClick()
+      logOutNavClick(event)
     } else if (link == "Sign Up") {
-      signUpNavClick()
+      signUpNavClick(event)
     } else if (link == "Log In") {
-      logInNavClick()
+      logInNavClick(event)
     }
 
   })
