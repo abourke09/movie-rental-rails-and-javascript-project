@@ -73,8 +73,7 @@ function listenForEditProfileClick(customer) {
 
 function listenForUpdateCustomerClick() {
   event.preventDefault()
-  $('button.update_customer').on('click', function (event) {
-    debugger
+  $('input.update_customer').on('click', function (event) {
     console.log("Event from UpdateCustomerClick:", event)
   })
 }
