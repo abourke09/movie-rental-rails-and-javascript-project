@@ -26,8 +26,30 @@ function signUpNavClick() {
   $('div#whiteboard').append("you clicked on the Sign Up link!")
 }
 
-function logInNavClick() {
-  $('div#whiteboard').append("you clicked on the Log In link!")
+function logInNavClick(event) {
+  $('div#whiteboard').html(
+    `<h1>Please Log In</h1>
+    <form>
+      <br><strong>Email:</strong><br>
+      <input type="text" name="email"></br>
+
+      <br><strong>Password:</strong><br>
+      <input type="text" name="password"></br>
+
+      <br><input class="login" type="submit" value="Log In">
+    </form>
+
+    <p>Alternatively, log in with Facebook (Insert actual link later).</p>
+    `
+  )
+  listenForLoginClick()
+}
+
+function listenForLoginClick() {
+  event.preventDefault()
+  $('input.login').on('click', function (event) {
+    console.log("Event from Login Button Click:", event)
+  })
 }
 
 function listenForNavClick() {
