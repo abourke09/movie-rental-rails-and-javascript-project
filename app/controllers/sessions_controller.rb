@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
       if @customer && @customer.authenticate(params[:customer][:password])
         session[:customer_id] = @customer.id
-        redirect_to customer_path(@customer)
+        redirect_to '/'
       else
         redirect_to '/login'
       end
