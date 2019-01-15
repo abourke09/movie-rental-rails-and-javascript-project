@@ -1,3 +1,12 @@
+class Rental {
+  constructor(obj) {
+    this.id = obj.id
+    this.customer_id = obj.customer_id
+    this.movie_id = obj.movie_id
+    this.status = obj.status
+  }
+}
+
 function rentalsNavClick(event) {
   clearWhiteboard()
   $('div#whiteboard').html(
