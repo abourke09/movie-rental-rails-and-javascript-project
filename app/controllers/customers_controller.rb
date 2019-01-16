@@ -2,6 +2,7 @@ class CustomersController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:new, :create]
   before_action :no_url_hacking, only: [:show, :edit, :update]
+#  skip_before_action :verify_authenticity_token , only: [:update]
 
   def show
     @customer = Customer.find(params[:id])
