@@ -4,7 +4,7 @@ class Movie {
     this.title = obj.title
     this.lead_actor = obj.lead_actor
     this.length = obj.length
-    this.rating = obj.rating
+    this.rating = " " + obj.rating + " "
     this.famous_quotes = obj.famous_quotes
   }
 }
@@ -30,7 +30,7 @@ Movie.prototype.movieHTML = function () {
 
 Movie.prototype.movieList = function () {
   return (`
-        <tr>
+        <tr class="content">
           <td><a href="movies/${this.id}">${this.id}. ${this.title}</a></td>
           <td>${this.rating}</td>
           <td>${this.length} minutes</td>
@@ -39,14 +39,41 @@ Movie.prototype.movieList = function () {
   `)
 }
 
+function filterText() {
+    $('div#movie-details').html('')
+		var rex = new RegExp($('#filterText').val());
+		if(rex =="/all/"){clearFilter()}else{
+			$('.content').hide();
+			$('.content').filter(function() {
+			return rex.test($(this).text());
+			}).show();
+	  }
+}
+
+function clearFilter() {
+		$('.filterText').val('');
+		$('.content').show();
+}
+
 function moviesNavClick(event) {
   $('div#whiteboard').html(`
-    <h1>All Movies: (add filter later)</h1>
+    <h1>All Movies:</h1>
     <table>
       <tbody>
         <tr>
           <th>Title</th>
-          <th>MPAA Rating</th>
+          <th>MPAA Rating
+            <select id='filterText' style='display:inline-block' onchange='filterText()'>
+              <option disabled selected>Select</option>
+              <option value=' G '>G</option>
+              <option value='PG '>PG</option>
+              <option value='PG-13 '>PG-13</option>
+              <option value='R '>R</option>
+              <option value='NC-17 '>NC-17</option>
+
+              <option value='all'>All</option>
+            </select>
+          </th>
           <th>Length</th>
           <th>Lead Actor</th>
         </tr>
@@ -136,7 +163,7 @@ Movie.prototype.AddFamousQuote = function () {
       <br><strong>Actor:</strong><br>
       <textarea name="actor"></textarea></br>
 
-      <br><input class="createFQ" type="submit" value="Create Famous Quote">
+      <br><input class="createFQ" data-movie_id="${this.id}" type="submit" value="Create Famous Quote">
     </form>
     `)
 }
