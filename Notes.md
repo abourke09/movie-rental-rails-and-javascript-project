@@ -1,9 +1,16 @@
 Notes.md
 
--get rent button to work
+from application.js file: //= require jqueryauthenticity
+
+
 -reroute login to root 3000
--add filter to All Movies list page
--is there a way to generate the MPAA statement on the Profile page using the customer helper method check_for_age?
+-understand filter on All Movies list page
+-add PUT/PATCH ajax requests for:
+  -Profile >Edit >listenForUpdateCustomerClick
+  -Movie >Rent >listenForRentClick
+  -My Rentals >Return Now >listenForReturnClick
+  -My Rentals >Add Famous Quote >Create a Famous Quote >listenForCreateQuoteClick
+  -Log Out / Log In / Sign Up
 
 
 
