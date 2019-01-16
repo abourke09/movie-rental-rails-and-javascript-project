@@ -89,6 +89,43 @@ function rentalsNavClick(event) {
         }
       })
       listenForMovieClick()
+      listenForReturnClick()
+      listenForAddQuoteClick()
     }
+  })
+}
+
+function listenForReturnClick() {
+  $('button.return').on('click', function (event) {
+    console.log("Event from Return Now Button Click:", event)
+  })
+}
+
+function listenForAddQuoteClick() {
+  $('button.add_quote').on('click', function (event) {
+    console.log("Event from Add Quote Button Click:", event)
+    $('div#movie-details').html('')
+    let movie_id = event.delegateTarget.dataset.movie_id
+    let url = `movies/${movie_id}`
+
+    $.ajax({
+      url: url,
+      method: 'get',
+      dataType: 'json',
+      success: function (response) {
+        let movie = new Movie(response)
+        let html = movie.AddFamousQuote()
+        $('div#movie-details').html(html)
+
+        listenForCreateQuoteClick()
+        }
+      })
+  })
+}
+
+function listenForCreateQuoteClick() {
+  $('input.create_quote').on('click', function (event) {
+    event.preventDefault();
+    console.log("Event from Create Quote Button Click:", event)
   })
 }

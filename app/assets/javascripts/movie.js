@@ -125,3 +125,18 @@ function listenForRentClick() {
     rentalsNavClick()
   })
 }
+
+Movie.prototype.AddFamousQuote = function () {
+  return (`
+    <h1>Add a Famous Quote from ${this.title}</h1>
+    <form>
+      <br><strong>Quote:</strong><br>
+      <textarea name="quote"></textarea></br>
+
+      <br><strong>Actor:</strong><br>
+      <textarea name="actor"></textarea></br>
+
+      <br><input class="createFQ" type="submit" value="Create Famous Quote">
+    </form>
+    `)
+}
