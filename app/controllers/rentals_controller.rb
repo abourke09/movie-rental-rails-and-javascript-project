@@ -30,7 +30,6 @@ class RentalsController < ApplicationController
   end
 
   def create
-    binding.pry
     @rental = Rental.create(
           :customer_id => params[:customer_id],
           :movie_id => params[:movie_id]
