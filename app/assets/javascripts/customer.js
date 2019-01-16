@@ -27,18 +27,20 @@ Customer.prototype.profileHTML = function () {
 Customer.prototype.editProfile = function () {
   return (`
     <h1>Edit Your Profile</h1>
-    <form>
+    <form id="edit_profile" action="/customers/${this.id}" method="PATCH">
+      <input type="hidden" name="authenticity_token" value="token_value">
+
       <br><strong>Name:</strong><br>
-      <input type="text" name="name" value="${this.name}"></br>
+      <input type="text" id="name" value="${this.name}"></br>
 
       <br><strong>Age:</strong><br>
-      <input type="number" name="age" value="${this.age}"></br>
+      <input type="number" id="age" value="${this.age}"></br>
 
       <br><strong>Email:</strong><br>
-      <input type="text" name="email" value="${this.email}"></br>
+      <input type="text" id="email" value="${this.email}"></br>
 
       <br><strong>Password:</strong><br>
-      <input type="text" name="password"></br>
+      <input type="text" id="password"></br>
 
       <br><input class="update_customer" type="submit" value="Update Customer">
     </form>
@@ -72,8 +74,31 @@ function listenForEditProfileClick(customer) {
 }
 
 function listenForUpdateCustomerClick() {
-  event.preventDefault()
-  $('input.update_customer').on('click', function (event) {
-    console.log("Event from UpdateCustomerClick:", event)
+  $('form#edit_profile').on('submit', function(){
+    event.preventDefault()
+    url= this.action
+
+    data = {
+      'authenticity_token': $("input[name='authenticity_token']").val(),
+      'name' : $("#name").attr("value"),
+      'age' : $("#age").attr("value"),
+      'email' : $("#email").attr("value"),
+      'password' : $("#password").attr("value")
+    }
+console.log(data)
+debugger
+    $.ajax({
+      type: 'PATCH',
+      url: url,
+      data: data,
+      success: function(response) {
+
+      }
+    })
+    // 29:04
+    // PATCH  /customers/:id
   })
+//  $('input.update_customer').on('click', function (event) {
+//    console.log("Event from UpdateCustomerClick:", event)
+//  })
 }
