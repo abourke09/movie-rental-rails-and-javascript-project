@@ -7,7 +7,10 @@ function clearHomepage() {
 }
 
 function clearWhiteboard() {
-  $('div#whiteboard').html('')
+  $('div#whiteboard').html(`
+  <div class="column left"></div>
+  <div class="column right"></div>
+  `)
 }
 
 function homeNavClick(event) {
