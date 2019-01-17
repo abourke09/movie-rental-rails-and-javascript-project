@@ -37,12 +37,12 @@ Rental.prototype.ReturnedTable = function () {
 
 function rentalsNavClick(event) {
   clearWhiteboard()
-  $('div#whiteboard').html(
+  $('div.column.left').html(
   `
   <h1>My Rentals</h1>
 
   <h3>Currently Checked Out:</h3>
-    <table>
+    <table class="table table-bordered">
       <tbody class="checked_out">
         <tr>
           <th>Title</th>
@@ -56,7 +56,7 @@ function rentalsNavClick(event) {
   <br></br>
 
   <h3>Past Rentals:</h3>
-  <table>
+  <table class="table table-bordered">
     <tbody class="returned">
       <tr>
         <th>Title</th>
@@ -67,9 +67,6 @@ function rentalsNavClick(event) {
       </tr>
     </tbody>
   </table>
-
-  <div id='movie-details'></div>
-
   `)
 
   $.ajax({
@@ -82,10 +79,10 @@ function rentalsNavClick(event) {
       rentals.forEach(function(element) {
         if (element.status == "checked out") {
           let newRental = new Rental(element)
-          $('div#whiteboard tbody.checked_out').append(newRental.CheckedOutTable())
+          $('div.column.left tbody.checked_out').append(newRental.CheckedOutTable())
         } else if (element.status == "returned") {
           let newRental = new Rental(element)
-          $('div#whiteboard tbody.returned').append(newRental.ReturnedTable())
+          $('div.column.left tbody.returned').append(newRental.ReturnedTable())
         }
       })
       listenForMovieClick()
@@ -104,7 +101,7 @@ function listenForReturnClick() {
 function listenForAddQuoteClick() {
   $('button.add_quote').on('click', function (event) {
     console.log("Event from Add Quote Button Click:", event)
-    $('div#movie-details').html('')
+    $('div.column.right').html('')
     let movie_id = event.delegateTarget.dataset.movie_id
     let url = `movies/${movie_id}`
 
@@ -115,7 +112,7 @@ function listenForAddQuoteClick() {
       success: function (response) {
         let movie = new Movie(response)
         let html = movie.AddFamousQuote()
-        $('div#movie-details').html(html)
+        $('div.column.right').html(html)
 
         listenForCreateQuoteClick()
         }

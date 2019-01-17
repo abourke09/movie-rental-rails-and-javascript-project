@@ -56,9 +56,9 @@ function clearFilter() {
 }
 
 function moviesNavClick(event) {
-  $('div#whiteboard').html(`
+  $('div.column.left').html(`
     <h1>All Movies:</h1>
-    <table>
+    <table class="table table-bordered">
       <tbody>
         <tr>
           <th>Title</th>
@@ -79,7 +79,6 @@ function moviesNavClick(event) {
         </tr>
       </tbody>
     </table>
-    <div id='movie-details'></div>
   `);
 
   $.ajax({
@@ -89,7 +88,8 @@ function moviesNavClick(event) {
     success: function (response) {
       response.forEach(item => {
         let newMovie = new Movie(item)
-        $('div#whiteboard tbody').append(newMovie.movieList())
+        $('div.column.left tbody').append(newMovie.movieList())
+  //      $('div#whiteboard tbody').append(newMovie.movieList())
       })
       listenForMovieClick()
     }
@@ -107,7 +107,8 @@ function listenForMovieClick() {
     success: function (response) {
       let movie = new Movie(response);
       let html = movie.movieHTML();
-      $('div#movie-details').html(html)
+      $('div.column.right').html(html)
+    //  $('div#movie-details').html(html)
 
     //  movie.famous_quotes.forEach(q => {
     //    let each_quote = `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
