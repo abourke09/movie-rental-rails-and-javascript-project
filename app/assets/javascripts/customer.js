@@ -27,7 +27,7 @@ Customer.prototype.profileHTML = function () {
 Customer.prototype.editProfile = function () {
   return (`
     <h1>Edit Your Profile</h1>
-    <form id="edit_profile" action="/customers/${this.id}" method="PATCH">
+    <form id="edit_profile" data-cust_id="${this.id}" action="/customers/${this.id}" method="PATCH">
       <input type="hidden" name="authenticity_token" value="token_value">
 
       <br><strong>Name:</strong><br>
@@ -48,6 +48,8 @@ Customer.prototype.editProfile = function () {
 }
 
 function profileNavClick(event) {
+  console.log("my event: ",event)
+  debugger
   $.ajax({
     url: event.toElement.href,
     method: 'get',
@@ -77,16 +79,20 @@ function listenForUpdateCustomerClick() {
   $('form#edit_profile').on('submit', function(){
     event.preventDefault()
     url= this.action
+    id = this.dataset["cust_id"]
 
     data = {
-      'authenticity_token': $("input[name='authenticity_token']").val(),
-      'name' : $("#name").attr("value"),
-      'age' : $("#age").attr("value"),
-      'email' : $("#email").attr("value"),
-      'password' : $("#password").attr("value")
+      'customer': {
+        'authenticity_token': $("input[name='authenticity_token']").val(),
+      //  'id' : id,
+        'name' : $("#name").val(),
+        'age' : $("#age").val(),
+        'email' : $("#email").val(),
+        'password' : $("#password").val()
+      }
     }
 console.log(data)
-debugger
+
     $.ajax({
       type: 'PATCH',
       url: url,
@@ -95,10 +101,8 @@ debugger
 
       }
     })
-    // 29:04
-    // PATCH  /customers/:id
+    //i need to figure out how to render the profile page after the patch request goes through
+  //profileNavClick(event)
   })
-//  $('input.update_customer').on('click', function (event) {
-//    console.log("Event from UpdateCustomerClick:", event)
-//  })
+
 }
