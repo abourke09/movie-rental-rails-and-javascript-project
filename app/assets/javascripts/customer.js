@@ -48,8 +48,6 @@ Customer.prototype.editProfile = function () {
 }
 
 function profileNavClick(event) {
-  console.log("my event: ",event)
-  debugger
   $.ajax({
     url: event.toElement.href,
     method: 'get',
@@ -57,7 +55,7 @@ function profileNavClick(event) {
     success: function (response) {
 
       let customer = new Customer(response)
-      $('div#whiteboard').append(customer.profileHTML())
+      $('div.column.left').append(customer.profileHTML())
 
       listenForEditProfileClick(customer)
       }
@@ -68,8 +66,7 @@ function listenForEditProfileClick(customer) {
   let cust = customer
 
   $('button.edit_profile').on('click', function (event) {
-    clearWhiteboard()
-    $('div#whiteboard').append(cust.editProfile())
+    $('div.column.right').html(cust.editProfile())
 
     listenForUpdateCustomerClick()
   })
@@ -84,14 +81,12 @@ function listenForUpdateCustomerClick() {
     data = {
       'customer': {
         'authenticity_token': $("input[name='authenticity_token']").val(),
-      //  'id' : id,
         'name' : $("#name").val(),
         'age' : $("#age").val(),
         'email' : $("#email").val(),
         'password' : $("#password").val()
       }
     }
-console.log(data)
 
     $.ajax({
       type: 'PATCH',
@@ -99,10 +94,20 @@ console.log(data)
       data: data,
       success: function(response) {
 
+        $.ajax({
+          url: this.url,
+          method: 'get',
+          dataType: 'json',
+          success: function (response) {
+            clearWhiteboard()
+
+            let customer = new Customer(response)
+            $('div.column.left').append(customer.profileHTML())
+
+            listenForEditProfileClick(customer)
+            }
+          })
       }
     })
-    //i need to figure out how to render the profile page after the patch request goes through
-  //profileNavClick(event)
   })
-
 }
