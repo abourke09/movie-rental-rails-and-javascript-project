@@ -3,14 +3,14 @@ Notes.md
 from application.js file: //= require jqueryauthenticity
 
 
--reroute login to root 3000
--understand filter on All Movies list page
--add PUT/PATCH ajax requests for:
-  -Profile >Edit >listenForUpdateCustomerClick
-  -Movie >Rent >listenForRentClick
-  -My Rentals >Return Now >listenForReturnClick
-  -My Rentals >Add Famous Quote >Create a Famous Quote >listenForCreateQuoteClick
-  -Log Out / Log In / Sign Up
+[ ] reroute login to root 3000
+[X] Understand filter on All Movies list page
+[ ] add PUT/PATCH ajax requests for:
+  [X] Profile >Edit >listenForUpdateCustomerClick
+  [ ] Movie >Rent >listenForRentClick
+  [ ] My Rentals >Return Now >listenForReturnClick
+  [ ] My Rentals >Add Famous Quote >Create a Famous Quote >listenForCreateQuoteClick
+  [ ] Log Out / Log In / Sign Up
 
 
 
