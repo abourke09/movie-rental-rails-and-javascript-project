@@ -121,8 +121,39 @@ function listenForAddQuoteClick() {
 }
 
 function listenForCreateQuoteClick() {
-  $('input.create_quote').on('click', function (event) {
+  $('form#createFQ').on('submit', function () {
     event.preventDefault();
-    console.log("Event from Create Quote Button Click:", event)
+    url = this.action
+console.log("Event from Create Quote Button Click:", event)
+
+    data = {
+    'famous_quote': {
+      'quote' : $("#quote").val(),
+      'actor' : $("#actor").val()
+      }
+    }
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: data,
+      success: function(response) {
+        new_url = new_url = url.replace("/famous_quotes", "")
+
+        $.ajax({
+          url: new_url,
+          method: 'get',
+          dataType: 'json',
+          success: function (response) {
+            let movie = new Movie(response);
+            let html = movie.movieHTML();
+            $('div.column.right').html(html)
+            listenForRentClick()
+          }
+        })
+
+      }
+    })
+//debugger
+
   })
 }
