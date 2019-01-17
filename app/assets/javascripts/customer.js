@@ -76,7 +76,6 @@ function listenForUpdateCustomerClick() {
   $('form#edit_profile').on('submit', function(){
     event.preventDefault()
     url= this.action
-    id = this.dataset["cust_id"]
 
     data = {
       'customer': {
