@@ -157,14 +157,14 @@ function listenForRentClick() {
 Movie.prototype.AddFamousQuote = function () {
   return (`
     <h1>Add a Famous Quote from ${this.title}</h1>
-    <form>
+    <form id="createFQ" data-movie_id="${this.id}" action="/movies/${this.id}/famous_quotes" method="POST">
       <br><strong>Quote:</strong><br>
-      <textarea name="quote"></textarea></br>
+      <textarea id="quote"></textarea></br>
 
       <br><strong>Actor:</strong><br>
-      <textarea name="actor"></textarea></br>
+      <textarea id="actor"></textarea></br>
 
-      <br><input class="createFQ" data-movie_id="${this.id}" type="submit" value="Create Famous Quote">
+      <br><input type="submit" value="Create Famous Quote">
     </form>
     `)
 }
