@@ -94,7 +94,36 @@ function rentalsNavClick(event) {
 
 function listenForReturnClick() {
   $('button.return').on('click', function (event) {
+    event.preventDefault()
+    // button is clicked
+    // rental status goes from "checked_out" to "returned"
+    //ajax GET request to url: /rentals/:id
+    rental_id = event.delegateTarget.dataset["rental_id"]
+    url = `/rentals/${rental_id}`
     console.log("Event from Return Now Button Click:", event)
+
+    data = {
+      'rental': {
+      //  'id' : rental_id,
+        'status' : "returned"
+      }
+    }
+debugger
+    $.ajax({
+      type: 'PATCH',
+      url: url,
+      data: data,
+      success: function(response) {
+        console.log("inside ajax resp:", response)
+
+      //  let movie = new Movie(response)
+      //  let html = movie.AddFamousQuote()
+      //  $('div.column.right').html(html)
+
+      //  listenForCreateQuoteClick()
+        }
+      })
+
   })
 }
 
@@ -124,7 +153,6 @@ function listenForCreateQuoteClick() {
   $('form#createFQ').on('submit', function () {
     event.preventDefault();
     url = this.action
-console.log("Event from Create Quote Button Click:", event)
 
     data = {
     'famous_quote': {
@@ -153,7 +181,6 @@ console.log("Event from Create Quote Button Click:", event)
 
       }
     })
-//debugger
 
   })
 }
