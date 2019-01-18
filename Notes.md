@@ -21,6 +21,22 @@ from application.js file: //= require jqueryauthenticity
   #    check_for_age: current_user.check_for_age
   #  }
 
+  <div class="navbar-header">
+
+  <a class="navbar-brand" href="/">Home</a>
+  <% if current_user %>
+    <a class="navbar-brand" href="/movies">All Movies</a>
+    <a class="navbar-brand" href="/customers/<%=current_user.id%>">My Profile</a>
+    <a class="navbar-brand" href="/customers/<%=current_user.id%>/rentals">My Rentals</a>
+    <a class="navbar-brand" href="/logout">Log Out</a>
+  <% else %>
+    <a class="navbar-brand" href="/signup">Sign Up</a>
+    <a class="navbar-brand" href="/login">Log In</a>
+  <% end %>
+  </div>
+
+
+
 ${this.famous_quotes}.forEach(q => {
   let each_quote = `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
   $('div#famous-quote-details').append(each_quote)
