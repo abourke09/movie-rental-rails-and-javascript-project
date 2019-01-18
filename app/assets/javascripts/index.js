@@ -134,6 +134,15 @@ function listenForLoginClick() {
   event.preventDefault()
   $('input.login').on('click', function (event) {
     console.log("Event from Login Button Click:", event)
+
+    $.ajax({
+      type: 'POST',
+      url: '/login',
+      success: function(response) {
+        console.log("inside ajax resp:", response)
+        homeNavClick(event)
+        }
+      })
   })
 }
 
