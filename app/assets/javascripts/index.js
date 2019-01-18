@@ -1,9 +1,37 @@
 $(function (){
+  setNavbar(event)
   listenForNavClick()
 })
 
 function clearHomepage() {
   $('div#homepage').html('')
+}
+
+function setNavbar(event) {
+  navbar_html = "placeholder"
+  current_user = {
+      id: 8,
+      name: "Cole Sand",
+      age: 13,
+      email: "csand@gmail.com",
+      check_for_age: "According the the Motion Picture Association of America (MPAA), you are old enough to see movies with a rating of G, PG, and PG-13."
+    }
+  console.log("setNavbar Event: ", event)
+
+  if (current_user) {
+    navbar_html = `
+      <a class="navbar-brand" href="/">Home</a>,
+      <a class="navbar-brand" href="/movies">All Movies</a>,
+      <a class="navbar-brand" href="/customers/${current_user.id}">My Profile</a>,
+      <a class="navbar-brand" href="/customers/${current_user.id}/rentals">My Rentals</a>,
+      <a class="navbar-brand" href="/logout">Log Out</a>`
+  } else {
+    navbar_html = `
+      <a class="navbar-brand" href="/">Home</a>,
+      <a class="navbar-brand" href="/signup">Sign Up</a>,
+      <a class="navbar-brand" href="/login">Log In</a>`
+  }
+  $('div.navbar-header').html(navbar_html)
 }
 
 function clearWhiteboard() {
@@ -14,15 +42,43 @@ function clearWhiteboard() {
 }
 
 function homeNavClick(event) {
-  //only for users who are already logged in...
-  $('div#whiteboard').html(`
+  setNavbar(event)
+  welcome_message = "placeholder"
+  current_user = {
+    id: 8,
+    name: "Cole Sand",
+    age: 13,
+    email: "csand@gmail.com",
+    check_for_age: "According the the Motion Picture Association of America (MPAA), you are old enough to see movies with a rating of G, PG, and PG-13."
+  }
+
+  console.log("homeNavClick Event: ", event)
+  if (current_user) {
+    welcome_message = `
     <h1>Movie Rental Homepage</h1>
-    <p>Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>
-    `)
+    <p>Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>`
+  } else {
+    welcome_message = `
+    <h1>Movie Rental Homepage</h1>
+    <p>Please log in or sign up by selecting one of the options from the navigation bar above.</p>`
+  }
+  $('div#whiteboard').html(welcome_message)
 }
 
-function logOutNavClick() {
+function logOutNavClick(event) {
   $('div#whiteboard').append("This Nav click should always be a button that routes to sessions#destroy")
+  console.log("Logout: ", event)
+
+  $.ajax({
+    type: 'GET',
+    url: '/logout',
+    success: function(response) {
+      console.log("inside ajax resp:", response)
+    //  $('html').html(response)
+    homeNavClick(event)
+
+    }
+  })
 }
 
 function signUpNavClick() {
