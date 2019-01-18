@@ -9,10 +9,17 @@ from application.js file: //= require jqueryauthenticity
   [X] Profile >Edit >listenForUpdateCustomerClick
   [ ] Movie >Rent >listenForRentClick
   [ ] My Rentals >Return Now >listenForReturnClick
-  [ ] My Rentals >Add Famous Quote >Create a Famous Quote >listenForCreateQuoteClick
+  [X] My Rentals >Add Famous Quote >Create a Famous Quote >listenForCreateQuoteClick
   [ ] Log Out / Log In / Sign Up
 
 
+  #  render json: {
+  #    id: current_user.id
+  #    name: current_user.name,
+  #    age: current_user.age,
+  #    email: current_user.email,
+  #    check_for_age: current_user.check_for_age
+  #  }
 
 ${this.famous_quotes}.forEach(q => {
   let each_quote = `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
