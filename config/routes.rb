@@ -25,4 +25,5 @@ Rails.application.routes.draw do
   get '/famous_quotes/:id', to: 'famous_quotes#show'
   get '/customers/:id', to: 'customers#show'
 
+  get '/get_current_user', to: 'customers#get_current_user'
 end
