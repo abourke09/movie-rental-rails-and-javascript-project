@@ -129,7 +129,7 @@ function listenForRentClick() {
       url: '/rentals',
       data: data,
       success: function(response) {
-        $('div.column.right').html(`<p>"Your movie had been rented. Please select the <em>My Rentals</em> page to view it."</p>`)
+        rentalsNavClick()
       }
     })
     //After movie is rented,  it should be added to the customer's rentals (in the database)
