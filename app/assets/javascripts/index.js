@@ -104,7 +104,9 @@ function listenForSignupClick(event) {
 function logInNavClick(event) {
   $('div#whiteboard').html(
     `<h1>Please Log In</h1>
-    <form>
+    <form id="login" action="/login" method="POST">
+      <input type="hidden" name="authenticity_token" value="token_value">
+
       <br><strong>Email:</strong><br>
       <input type="email" name="email"></br>
 
@@ -124,22 +126,25 @@ function listenForLoginClick() {
   event.preventDefault()
   $('input.login').on('click', function (event) {
     console.log("Event from Login Button Click:", event)
-
+    data = $(this).serialize()
     $.ajax({
       type: 'POST',
       url: '/login',
+      data: data,
       success: function(response) {
-        console.log("inside ajax resp:", response)
         homeNavClick(event)
         }
       })
   })
+  //I could just set the sessionStorage info here... probably should do that instead
+  //of an ajax call, a get_current_user variable in the serializer, an entire route, controller stuff...
+  currentUser()
 }
 
 function listenForNavClick() {
   $('a.navbar-brand').on('click', function (event) {
     event.preventDefault();
-    clearHomepage()
+    $('div#homepage').html('')
     clearWhiteboard()
     let link = event.delegateTarget.outerText
 
