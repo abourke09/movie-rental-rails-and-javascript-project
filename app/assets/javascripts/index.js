@@ -155,7 +155,7 @@ function listenForNavClick() {
     } else if (link == "My Profile") {
       profileNavClick(event)
     } else if (link == "My Rentals") {
-      rentalsNavClick(event)
+      rentalsNavClick()
     } else if (link == "Log Out") {
       logOutNavClick(event)
     } else if (link == "Sign Up") {

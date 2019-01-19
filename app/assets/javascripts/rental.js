@@ -35,7 +35,7 @@ Rental.prototype.ReturnedTable = function () {
   `)
 }
 
-function rentalsNavClick(event) {
+function rentalsNavClick() {
   clearWhiteboard()
   $('div.column.left').html(
   `
@@ -69,8 +69,11 @@ function rentalsNavClick(event) {
   </table>
   `)
 
+  customer_id = sessionStorage.get_current_user_id
+
   $.ajax({
-    url: event.delegateTarget.href,
+  //  url: event.delegateTarget.href,
+    url: `customers/${customer_id}/rentals`,
     method: 'get',
     dataType: 'json',
     success: function (response) {
@@ -95,34 +98,19 @@ function rentalsNavClick(event) {
 function listenForReturnClick() {
   $('button.return').on('click', function (event) {
     event.preventDefault()
-    // button is clicked
-    // rental status goes from "checked_out" to "returned"
-    //ajax GET request to url: /rentals/:id
+
     rental_id = event.delegateTarget.dataset["rental_id"]
     url = `/rentals/${rental_id}`
-    console.log("Event from Return Now Button Click:", event)
+    data = {'rental_id': rental_id}
 
-    data = {
-      'rental': {
-      //  'id' : rental_id,
-        'status' : "returned"
-      }
-    }
-debugger
     $.ajax({
-      type: 'PATCH',
+      type: 'GET',
       url: url,
       data: data,
       success: function(response) {
-        console.log("inside ajax resp:", response)
-
-      //  let movie = new Movie(response)
-      //  let html = movie.AddFamousQuote()
-      //  $('div.column.right').html(html)
-
-      //  listenForCreateQuoteClick()
-        }
-      })
+        rentalsNavClick()
+      }
+    })
 
   })
 }

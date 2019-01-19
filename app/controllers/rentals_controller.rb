@@ -45,7 +45,7 @@ class RentalsController < ApplicationController
     @rental.save
 
     @message = "Thank you for returning #{@rental.movie.title}."
-    redirect_to customer_rentals_path(@rental.customer), :notice => @message
+  #  redirect_to customer_rentals_path(@rental.customer), :notice => @message
   end
 
   private
