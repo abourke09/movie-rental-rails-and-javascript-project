@@ -94,20 +94,8 @@ function listenForUpdateCustomerClick() {
       url: url,
       data: data,
       success: function(response) {
-
-        $.ajax({
-          url: this.url,
-          method: 'get',
-          dataType: 'json',
-          success: function (response) {
-            clearWhiteboard()
-
-            let customer = new Customer(response)
-            $('div.column.left').append(customer.profileHTML())
-
-            listenForEditProfileClick(customer)
-            }
-          })
+        clearWhiteboard()
+        profileNavClick()
       }
     })
   })
