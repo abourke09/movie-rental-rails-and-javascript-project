@@ -32,10 +32,11 @@ class RentalsController < ApplicationController
   def create
     @rental = Rental.create(
           :customer_id => params[:customer_id],
-          :movie_id => params[:movie_id]
+          :movie_id => params[:movie_id],
+          :status => "checked out"
         )
     @message = @rental.rent_movie
-    redirect_to customer_rentals_path(@rental.customer), :notice => @message
+  #  redirect_to customer_rentals_path(@rental.customer), :notice => @message
   end
 
   def update

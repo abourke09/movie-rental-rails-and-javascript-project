@@ -21,7 +21,7 @@ Movie.prototype.movieHTML = function () {
     <p><strong>Lead Actor: </strong>${this.lead_actor} </p>
     <p><strong>Famous Quotes</strong></p>
     <div>${movieQuotes.join(' ')}</div>
-    <button class="show_details" data-movie_id="${this.id}" value="Rent Movie">Rent</button>
+    <button class="rent" data-movie_id="${this.id}" value="Rent Movie">Rent</button>
     `)
     //Would it be possible to add something on line 24 so that if the movie
     //is already rented by the user, the Rent Button does not show up? It would
@@ -108,15 +108,6 @@ function listenForMovieClick() {
       let movie = new Movie(response);
       let html = movie.movieHTML();
       $('div.column.right').html(html)
-    //  $('div#movie-details').html(html)
-
-    //  movie.famous_quotes.forEach(q => {
-    //    let each_quote = `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
-    //    $('div#movie-details').append(each_quote)
-    //  })
-
-    //  let button = movie.rentButton
-    //  $('div#movie-details').append(button)
       listenForRentClick()
       }
     })
@@ -125,32 +116,25 @@ function listenForMovieClick() {
 }
 
 function listenForRentClick() {
-  $('button.show_details').on('click', function (event) {
+  $('button.rent').on('click', function (event) {
     event.preventDefault()
 
-  //  url = 'http://localhost:3000/customers/8/rentals'
-  //  data = {
-  //      'authenticity_token': $("input[name='authenticity_token']").val(),
-  //      'food': {
-  //          'name': $("#food_name").val(),
-  //          'group_id': $("#food_group_id").val(),
-  //          'cals': $("#food_cals").val()
-  //      }
-  //  }
+    data = {
+        'customer_id' : sessionStorage.get_current_user_id,
+        'movie_id' : this.dataset.movie_id
+    }
 
-  //  event.stopImmediatePropagation();
-
-  //  $.ajax({
-  //    type: 'POST',
-  //    url: url,
-  //    data: data,
-  //    success: function (response) {
-
-  //    }
-  //  })
+    $.ajax({
+      type: 'POST',
+      url: '/rentals',
+      data: data,
+      success: function(response) {
+        $('div.column.right').html(`<p>"Your movie had been rented. Please select the <em>My Rentals</em> page to view it."</p>`)
+      }
+    })
     //After movie is rented,  it should be added to the customer's rentals (in the database)
     //and the whiteboard should fill with the customer's Rentals info
-    rentalsNavClick()
+  //  rentalsNavClick()
   })
 }
 
