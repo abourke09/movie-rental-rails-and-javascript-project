@@ -55,7 +55,7 @@ function clearFilter() {
 		$('.content').show();
 }
 
-function moviesNavClick(event) {
+function moviesNavClick() {
   $('div.column.left').html(`
     <h1>All Movies:</h1>
     <table class="table table-bordered">
@@ -82,7 +82,7 @@ function moviesNavClick(event) {
   `);
 
   $.ajax({
-    url: event.delegateTarget.href,
+    url: '/movies',
     method: 'get',
     dataType: 'json',
     success: function (response) {

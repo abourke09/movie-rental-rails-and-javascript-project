@@ -42,7 +42,7 @@ function clearWhiteboard() {
   `)
 }
 
-function homeNavClick(event) {
+function homeNavClick() {
   setNavbar()
   current_user_id = sessionStorage.getItem("get_current_user_id")
 
@@ -58,14 +58,12 @@ function homeNavClick(event) {
   $('div#whiteboard').html(welcome_message)
 }
 
-function logOutNavClick(event) {
-  $('div#whiteboard').append("This Nav click should always be a button that routes to sessions#destroy")
-
+function logOutNavClick() {
   $.ajax({
     type: 'GET',
     url: '/logout',
     success: function(response) {
-      homeNavClick(event)
+      homeNavClick()
     }
   })
   sessionStorage.clear()
@@ -91,17 +89,17 @@ function signUpNavClick() {
     </form>
     `
   )
-  listenForSignupClick(event)
+  listenForSignupClick()
 }
 
-function listenForSignupClick(event) {
+function listenForSignupClick() {
   event.preventDefault()
   $('input.signup').on('click', function (event) {
     console.log("Event from Create Customer button click:", event)
   })
 }
 
-function logInNavClick(event) {
+function logInNavClick() {
   $('div#whiteboard').html(
     `<h1>Please Log In</h1>
     <form id="login" action="/login" method="POST">
@@ -132,7 +130,7 @@ function listenForLoginClick() {
       url: '/login',
       data: data,
       success: function(response) {
-        homeNavClick(event)
+        homeNavClick()
         }
       })
   })
@@ -149,19 +147,19 @@ function listenForNavClick() {
     let link = event.delegateTarget.outerText
 
     if (link == "Home") {
-      homeNavClick(event)
+      homeNavClick()
     } else if (link == "All Movies") {
-      moviesNavClick(event)
+      moviesNavClick()
     } else if (link == "My Profile") {
-      profileNavClick(event)
+      profileNavClick()
     } else if (link == "My Rentals") {
       rentalsNavClick()
     } else if (link == "Log Out") {
-      logOutNavClick(event)
+      logOutNavClick()
     } else if (link == "Sign Up") {
-      signUpNavClick(event)
+      signUpNavClick()
     } else if (link == "Log In") {
-      logInNavClick(event)
+      logInNavClick()
     }
 
   })

@@ -72,7 +72,6 @@ function rentalsNavClick() {
   customer_id = sessionStorage.get_current_user_id
 
   $.ajax({
-  //  url: event.delegateTarget.href,
     url: `customers/${customer_id}/rentals`,
     method: 'get',
     dataType: 'json',
