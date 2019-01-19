@@ -1,29 +1,29 @@
 $(function (){
-  setNavbar(event)
+  currentUser()
+  setNavbar()
   listenForNavClick()
 })
 
-function clearHomepage() {
-  $('div#homepage').html('')
+function currentUser() {
+  $.ajax({
+    type: 'GET',
+    url: '/get_current_user',
+    success: function(response) {
+      sessionStorage.setItem("get_current_user_id", response.id)
+      }
+    })
+  sessionStorage.getItem("get_current_user_id")
 }
 
-function setNavbar(event) {
-  navbar_html = "placeholder"
-  current_user = {
-      id: 8,
-      name: "Cole Sand",
-      age: 13,
-      email: "csand@gmail.com",
-      check_for_age: "According the the Motion Picture Association of America (MPAA), you are old enough to see movies with a rating of G, PG, and PG-13."
-    }
-  console.log("setNavbar Event: ", event)
+function setNavbar() {
+  current_user_id = sessionStorage.getItem("get_current_user_id")
 
-  if (current_user) {
+  if (current_user_id != "undefined") {
     navbar_html = `
       <a class="navbar-brand" href="/">Home</a>,
       <a class="navbar-brand" href="/movies">All Movies</a>,
-      <a class="navbar-brand" href="/customers/${current_user.id}">My Profile</a>,
-      <a class="navbar-brand" href="/customers/${current_user.id}/rentals">My Rentals</a>,
+      <a class="navbar-brand" href="/customers/${current_user_id}">My Profile</a>,
+      <a class="navbar-brand" href="/customers/${current_user_id}/rentals">My Rentals</a>,
       <a class="navbar-brand" href="/logout">Log Out</a>`
   } else {
     navbar_html = `
@@ -31,6 +31,7 @@ function setNavbar(event) {
       <a class="navbar-brand" href="/signup">Sign Up</a>,
       <a class="navbar-brand" href="/login">Log In</a>`
   }
+
   $('div.navbar-header').html(navbar_html)
 }
 
@@ -42,43 +43,32 @@ function clearWhiteboard() {
 }
 
 function homeNavClick(event) {
-  setNavbar(event)
-  welcome_message = "placeholder"
-  current_user = {
-    id: 8,
-    name: "Cole Sand",
-    age: 13,
-    email: "csand@gmail.com",
-    check_for_age: "According the the Motion Picture Association of America (MPAA), you are old enough to see movies with a rating of G, PG, and PG-13."
-  }
+  setNavbar()
+  current_user_id = sessionStorage.getItem("get_current_user_id")
 
-  console.log("homeNavClick Event: ", event)
-  if (current_user) {
+  if (current_user_id != "undefined") {
     welcome_message = `
     <h1>Movie Rental Homepage</h1>
-    <p>Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>`
+    <p>Welcome! Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>`
   } else {
     welcome_message = `
     <h1>Movie Rental Homepage</h1>
-    <p>Please log in or sign up by selecting one of the options from the navigation bar above.</p>`
+    <p>Welcome! Please log in or sign up by selecting one of the options from the navigation bar above.</p>`
   }
   $('div#whiteboard').html(welcome_message)
 }
 
 function logOutNavClick(event) {
   $('div#whiteboard').append("This Nav click should always be a button that routes to sessions#destroy")
-  console.log("Logout: ", event)
 
   $.ajax({
     type: 'GET',
     url: '/logout',
     success: function(response) {
-      console.log("inside ajax resp:", response)
-    //  $('html').html(response)
-    homeNavClick(event)
-
+      homeNavClick(event)
     }
   })
+  sessionStorage.clear()
 }
 
 function signUpNavClick() {

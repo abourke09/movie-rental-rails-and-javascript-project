@@ -4,6 +4,10 @@ class CustomersController < ApplicationController
   before_action :no_url_hacking, only: [:show, :edit, :update]
 #  skip_before_action :verify_authenticity_token , only: [:update]
 
+  def get_current_user
+    render json: current_user  
+  end
+
   def show
     @customer = Customer.find(params[:id])
     @age_check = @customer.check_for_age
