@@ -41,7 +41,8 @@ class RentalsController < ApplicationController
 
   def update
     @rental = Rental.find_by(id: params[:rental_id])
-    @rental.update(:status => "returned")
+    @rental.update(:status => params[:status])
+  #  @rental.update(:status => "returned")
     @rental.save
 
     @message = "Thank you for returning #{@rental.movie.title}."

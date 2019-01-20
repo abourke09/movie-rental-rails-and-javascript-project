@@ -118,23 +118,54 @@ function listenForMovieClick() {
 function listenForRentClick() {
   $('button.rent').on('click', function (event) {
     event.preventDefault()
-
-    data = {
-        'customer_id' : sessionStorage.get_current_user_id,
-        'movie_id' : this.dataset.movie_id
-    }
+    cust_id = sessionStorage.getItem("get_current_user_id")
+    movie_id = this.dataset.movie_id
 
     $.ajax({
-      type: 'POST',
-      url: '/rentals',
-      data: data,
+      type: 'GET',
+      url: `/movies/${movie_id}`,
+      dataType: 'json',
       success: function(response) {
-        rentalsNavClick()
+        rentals = response.rentals
+
+        var rental_id
+        var already_rented = false;
+        for(var i = 0; i < rentals.length; i++) {
+            if (rentals[i].customer_id == cust_id && rentals[i].status == "returned") {
+                already_rented = true;
+                rental_id = rentals[i].id;
+                break;
+            }
+        }
+
+        if (already_rented) {
+          type = 'GET'
+          url = '/rentals/:id'
+          data = {
+              'customer_id' : cust_id,
+              'movie_id' : movie_id,
+              'rental_id' : rental_id,
+              'status' : 'checked out'
+          }
+        } else {
+          type = 'POST'
+          url = '/rentals'
+          data = {
+              'customer_id' : cust_id,
+              'movie_id' : movie_id,
+          }
+        }
+
+        $.ajax({
+          type: type,
+          url: url,
+          data: data,
+          success: function(response) {
+            rentalsNavClick()
+          }
+        })
       }
     })
-    //After movie is rented,  it should be added to the customer's rentals (in the database)
-    //and the whiteboard should fill with the customer's Rentals info
-  //  rentalsNavClick()
   })
 }
 
