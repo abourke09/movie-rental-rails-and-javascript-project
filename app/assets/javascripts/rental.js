@@ -100,7 +100,10 @@ function listenForReturnClick() {
 
     rental_id = event.delegateTarget.dataset["rental_id"]
     url = `/rentals/${rental_id}`
-    data = {'rental_id': rental_id}
+    data = {
+      'rental_id' : rental_id,
+      'status' : 'returned'
+    }
 
     $.ajax({
       type: 'GET',
