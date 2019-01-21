@@ -2,13 +2,19 @@ Notes.md
 
 from application.js file: //= require jqueryauthenticity
 [ ] Fix speed issues! If I click too fast, the document ready won't have finished and it wont work how its supposed to
-[ ] figure out how to access @current_user.... do i make a route? so many errors the first time
+[ ] Change get_current_user_id to only need sessionStorage instead of an entire Ajax request
+[ ] Instead of loading the NavBar each time, let the application.html.erb landing page include the 'not logged in' version, and shovel in the html to replace it with the 'logged in version' when a user actually logs in. Then do the reverse when someone logs out.
+[ ] Figure out how to incorporate error and success messages/routing
+[ ] Check for age doesn't work anymore!!! :( :( :(
 [X] reroute login to root 3000
+[X] Make Rent button disappear if the customer has already rented it
+[X] Remove duplication of Rental objects if the movie is
+    rented>returned>rented again
 [X] Understand filter on All Movies list page
 [ ] add PUT/PATCH ajax requests for:
   [X] Profile >Edit >listenForUpdateCustomerClick
-  [ ] Movie >Rent >listenForRentClick
-  [ ] My Rentals >Return Now >listenForReturnClick
+  [X] Movie >Rent >listenForRentClick
+  [X] My Rentals >Return Now >listenForReturnClick
   [X] My Rentals >Add Famous Quote >Create a Famous Quote >listenForCreateQuoteClick
   [X] Log Out  
   [ ] Log In
