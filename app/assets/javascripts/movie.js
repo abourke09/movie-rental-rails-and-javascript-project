@@ -99,19 +99,34 @@ function moviesNavClick() {
 function listenForMovieClick() {
   $('td a').on('click', function (event) {
     event.preventDefault();
+    cust_id = sessionStorage.getItem("get_current_user_id")
 
-  $.ajax({
-    url: this.href,
-    method: 'get',
-    dataType: 'json',
-    success: function (response) {
-      let movie = new Movie(response);
-      let html = movie.movieHTML();
-      $('div.column.right').html(html)
-      listenForRentClick()
+    $.ajax({
+      url: this.href,
+      method: 'get',
+      dataType: 'json',
+      success: function (response) {
+        let movie = new Movie(response);
+        let html = movie.movieHTML();
+        $('div.column.right').html(html)
+        rentals = response.rentals
+
+        var display_rent_button = true;
+        for(var i = 0; i < rentals.length; i++) {
+            if (rentals[i].customer_id == cust_id && rentals[i].status == "checked out") {
+                display_rent_button = false;
+                break;
+            }
+        }
+
+        if (!display_rent_button){
+         $ ('button.rent').remove()
+        } else {
+           listenForRentClick()
+        }
+
       }
     })
-
   })
 }
 
