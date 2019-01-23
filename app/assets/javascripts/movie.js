@@ -23,9 +23,6 @@ Movie.prototype.movieHTML = function () {
     <div>${movieQuotes.join(' ')}</div>
     <button class="rent" data-movie_id="${this.id}" value="Rent Movie">Rent</button>
     `)
-    //Would it be possible to add something on line 24 so that if the movie
-    //is already rented by the user, the Rent Button does not show up? It would
-    //help the Rentals Page make more sense when a movie is clicked
 }
 
 Movie.prototype.movieList = function () {
@@ -89,7 +86,6 @@ function moviesNavClick() {
       response.forEach(item => {
         let newMovie = new Movie(item)
         $('div.column.left tbody').append(newMovie.movieList())
-  //      $('div#whiteboard tbody').append(newMovie.movieList())
       })
       listenForMovieClick()
     }
