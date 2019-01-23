@@ -1,7 +1,8 @@
 Notes.md
 
 from application.js file: //= require jqueryauthenticity
-[ ] Facebook login
+[ ] Add Facebook login
+[ ] when I log in, the welcome message doesn't display the correct message and no details load until i refresh (CUSTOMERS ID IS UNDEFINED IN URL)
 [ ] When Navbar is clicked after successful login, the listener doesn't work and it loads a new page
 [ ] Figure out how to incorporate error and success messages/routing
 [ ] Check for age doesn't work anymore!!! :( :( :(
