@@ -15,21 +15,18 @@ function currentUser() {
 }
 
 
+function homeNavClick() {
   if (current_user_id != "undefined") {
-    navbar_html = `
-      <a class="navbar-brand" href="/">Home</a>,
-      <a class="navbar-brand" href="/movies">All Movies</a>,
-      <a class="navbar-brand" href="/customers/${current_user_id}">My Profile</a>,
-      <a class="navbar-brand" href="/customers/${current_user_id}/rentals">My Rentals</a>,
-      <a class="navbar-brand" href="/logout">Log Out</a>`
+    welcome_message = `
+    <h1>Movie Rental Homepage</h1>
+    <p>You're inside the homeNavClick! Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>`
   } else {
-    navbar_html = `
-      <a class="navbar-brand" href="/">Home</a>,
-      <a class="navbar-brand" href="/signup">Sign Up</a>,
-      <a class="navbar-brand" href="/login">Log In</a>`
+    welcome_message = `
+    <h1>Movie Rental Homepage</h1>
+    <p>You're inside the homeNavClick! Please log in or sign up by selecting one of the options from the navigation bar above.</p>`
   }
-
-  $('div.navbar-header').html(navbar_html)
+  $('div#whiteboard').html(welcome_message)
+  listenForNavClick()
 }
 
 function clearWhiteboard() {
@@ -39,9 +36,6 @@ function clearWhiteboard() {
   `)
 }
 
-function homeNavClick() {
-  setNavbar()
-  current_user_id = sessionStorage.getItem("get_current_user_id")
 function navbarLoggedIn() {
   navbar_html = `
     <a class="navbar-brand" href="/">Home</a>,
@@ -52,16 +46,6 @@ function navbarLoggedIn() {
   $('div.navbar-header').html(navbar_html)
 }
 
-  if (current_user_id != "undefined") {
-    welcome_message = `
-    <h1>Movie Rental Homepage</h1>
-    <p>Welcome! Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>`
-  } else {
-    welcome_message = `
-    <h1>Movie Rental Homepage</h1>
-    <p>Welcome! Please log in or sign up by selecting one of the options from the navigation bar above.</p>`
-  }
-  $('div#whiteboard').html(welcome_message)
 function navbarLoggedOut() {
   navbar_html = `
     <a class="navbar-brand" href="/">Home</a>,
@@ -75,10 +59,16 @@ function logOutNavClick() {
     type: 'GET',
     url: '/logout',
     success: function(response) {
-      homeNavClick()
+      navbarLoggedOut();
+      sessionStorage.clear();
+      homeNavClick();
+    //  welcome_message = `
+    //    <h1>Movie Rental Homepage</h1>
+    //    <p>Welcome! Please log in or sign up by selecting one of the options from the navigation bar above.</p>`
+    //  $('div#whiteboard').html(welcome_message)
+    //  listenForNavClick()
     }
   })
-  sessionStorage.clear()
 }
 
 function signUpNavClick() {
