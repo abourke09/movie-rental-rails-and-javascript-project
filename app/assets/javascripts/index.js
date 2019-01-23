@@ -161,8 +161,8 @@ function listenForLoginClick() {
       url: '/login',
       data: data,
       success: function(response) {
-        navbarLoggedIn()
         currentUser()
+        navbarLoggedIn()
         homeNavClick()
     //    welcome_message = `
     //      <h1>Movie Rental Homepage</h1>
