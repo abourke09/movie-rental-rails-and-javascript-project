@@ -12,11 +12,9 @@ function currentUser() {
       sessionStorage.setItem("get_current_user_id", response.id)
       }
     })
-  sessionStorage.getItem("get_current_user_id")
+    current_user_id = sessionStorage.getItem("get_current_user_id")
 }
 
-function setNavbar() {
-  current_user_id = sessionStorage.getItem("get_current_user_id")
 
   if (current_user_id != "undefined") {
     navbar_html = `

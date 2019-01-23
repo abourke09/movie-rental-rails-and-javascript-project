@@ -99,7 +99,6 @@ function moviesNavClick() {
 function listenForMovieClick() {
   $('td a').on('click', function (event) {
     event.preventDefault();
-    cust_id = sessionStorage.getItem("get_current_user_id")
 
     $.ajax({
       url: this.href,
@@ -113,7 +112,7 @@ function listenForMovieClick() {
 
         var display_rent_button = true;
         for(var i = 0; i < rentals.length; i++) {
-            if (rentals[i].customer_id == cust_id && rentals[i].status == "checked out") {
+            if (rentals[i].customer_id == current_user_id && rentals[i].status == "checked out") {
                 display_rent_button = false;
                 break;
             }
@@ -133,7 +132,6 @@ function listenForMovieClick() {
 function listenForRentClick() {
   $('button.rent').on('click', function (event) {
     event.preventDefault()
-    cust_id = sessionStorage.getItem("get_current_user_id")
     movie_id = this.dataset.movie_id
 
     $.ajax({
@@ -146,7 +144,7 @@ function listenForRentClick() {
         var rental_id
         var already_rented = false;
         for(var i = 0; i < rentals.length; i++) {
-            if (rentals[i].customer_id == cust_id && rentals[i].status == "returned") {
+            if (rentals[i].customer_id == current_user_id && rentals[i].status == "returned") {
                 already_rented = true;
                 rental_id = rentals[i].id;
                 break;
@@ -157,7 +155,7 @@ function listenForRentClick() {
           type = 'GET'
           url = '/rentals/:id'
           data = {
-              'customer_id' : cust_id,
+              'customer_id' : current_user_id,
               'movie_id' : movie_id,
               'rental_id' : rental_id,
               'status' : 'checked out'
@@ -166,7 +164,7 @@ function listenForRentClick() {
           type = 'POST'
           url = '/rentals'
           data = {
-              'customer_id' : cust_id,
+              'customer_id' : current_user_id,
               'movie_id' : movie_id,
           }
         }

@@ -69,10 +69,8 @@ function rentalsNavClick() {
   </table>
   `)
 
-  customer_id = sessionStorage.get_current_user_id
-
   $.ajax({
-    url: `customers/${customer_id}/rentals`,
+    url: `customers/${current_user_id}/rentals`,
     method: 'get',
     dataType: 'json',
     success: function (response) {

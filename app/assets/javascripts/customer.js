@@ -48,7 +48,7 @@ Customer.prototype.editProfile = function () {
 }
 
 function profileNavClick() {
-  customer_id = sessionStorage.get_current_user_id
+  customer_id = current_user_id
 
   $.ajax({
     url: `customers/${customer_id}`,
