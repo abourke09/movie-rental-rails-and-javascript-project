@@ -33,9 +33,13 @@ class RentalsController < ApplicationController
     @rental = Rental.create(
           :customer_id => params[:customer_id],
           :movie_id => params[:movie_id],
-          :status => "checked out"
+      #    :status => "checked out"
         )
     @message = @rental.rent_movie
+  #  alert("Alert!!")
+    flash.now[:alert] = @message
+
+  #  binding.pry
   #  redirect_to customer_rentals_path(@rental.customer), :notice => @message
   end
 
@@ -46,6 +50,8 @@ class RentalsController < ApplicationController
     @rental.save
 
     @message = "Thank you for returning #{@rental.movie.title}."
+    flash.now[:alert] = @message
+
   #  redirect_to customer_rentals_path(@rental.customer), :notice => @message
   end
 
