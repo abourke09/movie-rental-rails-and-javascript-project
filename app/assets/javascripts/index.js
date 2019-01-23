@@ -132,10 +132,10 @@ function logInNavClick() {
       <input type="hidden" name="authenticity_token" value="token_value">
 
       <br><strong>Email:</strong><br>
-      <input type="email" name="email"></br>
+      <input type="email" id="email"></br>
 
       <br><strong>Password:</strong><br>
-      <input type="password" name="password"></br>
+      <input type="password" id="password"></br>
 
       <br><input class="login" type="submit" value="Log In">
     </form>
@@ -147,24 +147,23 @@ function logInNavClick() {
 }
 
 function listenForLoginClick() {
-  event.preventDefault()
-  $('input.login').on('click', function (event) {
-    console.log("Event from Login Button Click:", event)
-    data = $(this).serialize()
+  $('form#login').on('submit', function (event) {
+    event.preventDefault()
+    data = {'customer' : {
+        'authenticity_token': $("input[name='authenticity_token']").val(),
+        'email' : $("#email").val(),
+        'password' : $("#password").val()
+      }
+    }
+
     $.ajax({
       type: 'POST',
       url: '/login',
       data: data,
       success: function(response) {
+        navbarLoggedIn()
+        currentUser()
         homeNavClick()
-        }
-      })
-  })
-  //I could just set the sessionStorage info here... probably should do that instead
-  //of an ajax call, a get_current_user variable in the serializer, an entire route, controller stuff...
-  currentUser()
-}
-
     //    welcome_message = `
     //      <h1>Movie Rental Homepage</h1>
     //      <p>Welcome! Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>`
