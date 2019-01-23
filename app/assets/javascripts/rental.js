@@ -35,6 +35,59 @@ Rental.prototype.ReturnedTable = function () {
   `)
 }
 
+function listenForRentClick() {
+  $('button.rent').on('click', function (event) {
+    event.preventDefault()
+    movie_id = this.dataset.movie_id
+
+    $.ajax({
+      type: 'GET',
+      url: `/movies/${movie_id}`,
+      dataType: 'json',
+      success: function(response) {
+        rentals = response.rentals
+
+        var rental_id
+        var already_rented = false;
+        for(var i = 0; i < rentals.length; i++) {
+            if (rentals[i].customer_id == current_user_id && rentals[i].status == "returned") {
+                already_rented = true;
+                rental_id = rentals[i].id;
+                break;
+            }
+        }
+
+        if (already_rented) {
+          type = 'GET'
+          url = '/rentals/:id'
+          data = {
+              'customer_id' : current_user_id,
+              'movie_id' : movie_id,
+              'rental_id' : rental_id,
+              'status' : 'checked out'
+          }
+        } else {
+          type = 'POST'
+          url = '/rentals'
+          data = {
+              'customer_id' : current_user_id,
+              'movie_id' : movie_id,
+          }
+        }
+
+        $.ajax({
+          type: type,
+          url: url,
+          data: data,
+          success: function(response) {
+            rentalsNavClick()
+          }
+        })
+      }
+    })
+  })
+}
+
 function rentalsNavClick() {
   clearWhiteboard()
   $('div.column.left').html(
