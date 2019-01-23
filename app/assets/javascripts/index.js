@@ -14,6 +14,30 @@ function currentUser() {
     current_user_id = sessionStorage.getItem("get_current_user_id")
 }
 
+function listenForNavClick() {
+  $('a.navbar-brand').on('click', function (event) {
+    event.preventDefault();
+    $('div#homepage').html('')
+    clearWhiteboard()
+    let link = event.delegateTarget.outerText
+
+    if (link == "Home") {
+      homeNavClick()
+    } else if (link == "All Movies") {
+      moviesNavClick()
+    } else if (link == "My Profile") {
+      profileNavClick()
+    } else if (link == "My Rentals") {
+      rentalsNavClick()
+    } else if (link == "Log Out") {
+      logOutNavClick()
+    } else if (link == "Sign Up") {
+      signUpNavClick()
+    } else if (link == "Log In") {
+      logInNavClick()
+    }
+  })
+}
 
 function homeNavClick() {
   if (current_user_id != "undefined") {
@@ -141,28 +165,12 @@ function listenForLoginClick() {
   currentUser()
 }
 
-function listenForNavClick() {
-  $('a.navbar-brand').on('click', function (event) {
-    event.preventDefault();
-    $('div#homepage').html('')
-    clearWhiteboard()
-    let link = event.delegateTarget.outerText
-
-    if (link == "Home") {
-      homeNavClick()
-    } else if (link == "All Movies") {
-      moviesNavClick()
-    } else if (link == "My Profile") {
-      profileNavClick()
-    } else if (link == "My Rentals") {
-      rentalsNavClick()
-    } else if (link == "Log Out") {
-      logOutNavClick()
-    } else if (link == "Sign Up") {
-      signUpNavClick()
-    } else if (link == "Log In") {
-      logInNavClick()
-    }
-
+    //    welcome_message = `
+    //      <h1>Movie Rental Homepage</h1>
+    //      <p>Welcome! Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>`
+    //    $('div#whiteboard').html(welcome_message)
+      }
+    })
   })
+//  listenForNavClick()
 }
