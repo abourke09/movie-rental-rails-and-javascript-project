@@ -36,7 +36,6 @@ class RentalsController < ApplicationController
       #    :status => "checked out"
         )
     @message = @rental.rent_movie
-  #  alert("Alert!!")
     flash.now[:alert] = @message
 
   #  binding.pry
@@ -48,9 +47,9 @@ class RentalsController < ApplicationController
     @rental.update(:status => params[:status])
   #  @rental.update(:status => "returned")
     @rental.save
-
-    @message = "Thank you for returning #{@rental.movie.title}."
-    flash.now[:alert] = @message
+    flash[:notice] = "You're seeing the Flash Notice WOW!"
+  #  @message = "Thank you for returning #{@rental.movie.title}."
+  #  flash.now[:alert] = @message
 
   #  redirect_to customer_rentals_path(@rental.customer), :notice => @message
   end
