@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def new
     @customer = Customer.new
     @customers = Customer.all
@@ -20,7 +22,7 @@ class SessionsController < ApplicationController
 
       if @customer && @customer.authenticate(params[:customer][:password])
         session[:customer_id] = @customer.id
-        redirect_to customer_path(@customer)
+      #  redirect_to '/'
       else
         redirect_to '/login'
       end
@@ -29,7 +31,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete :customer_id
-    redirect_to '/'
+  #  redirect_to '/'
   end
 
   private

@@ -2,6 +2,10 @@ class Rental < ApplicationRecord
   belongs_to :movie
   belongs_to :customer
 
+  def movie_details
+    {title: self.movie.title, rating: self.movie.rating, length: self.movie.length, lead_actor: self.movie.lead_actor}
+  end
+
   def rent_movie
     if self.customer != nil
       if !old_enough?
@@ -15,7 +19,7 @@ class Rental < ApplicationRecord
 
   def old_enough?
     rental_rating = self.movie.rating
-    
+
     case rental_rating
     when "NC-17"
       required_age = 18

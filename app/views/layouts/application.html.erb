@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MovieRentalRailsProject</title>
+    <title>Movie Rental Rails + Javascript Project</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -14,29 +14,41 @@
       <div class="container">
 
         <div class="navbar-header">
+          <a class="navbar-brand" href="/">Home</a>
 
-        <a class="navbar-brand" href="/"/>Home</a>
-        <% if current_user %>
-          <a class="navbar-brand" href="/movies"/>All Movies</a>
-          <a class="navbar-brand" href="/customers/<%=current_user.id%>"/>My Profile</a>
-          <a class="navbar-brand" href="/customers/<%=current_user.id%>/rentals"/>My Rentals</a>
-          <a class="navbar-brand" href="/logout"/>Log Out</a>
-        <% else %>
-          <a class="navbar-brand" href="/signup"/>Sign Up</a>
-          <a class="navbar-brand" href="/login"/>Log In</a>
-        <% end %>
+          <% if current_user %>
+            <a class="navbar-brand" href="/movies">All Movies</a>
+            <a class="navbar-brand" href="/customers/<%=current_user.id%>">My Profile</a>
+            <a class="navbar-brand" href="/customers/<%=current_user.id%>/rentals">My Rentals</a>
+            <a class="navbar-brand" href="/logout">Log Out</a>
+          <% else %>
+            <a class="navbar-brand" href="/signup">Sign Up</a>
+            <a class="navbar-brand" href="/login">Log In</a>
+          <% end %>
         </div>
 
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-          </ul>
-        </div><!--/.nav-collapse -->
+          <ul class="nav navbar-nav"></ul>
+        </div>
+
       </div>
     </div>
+
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
 
     <!-- content -->
     <div class="container"  role="main">
       <%= yield %>
     </div>
+
+    <div class="container"  role="main">
+      <div id="whiteboard">
+        <div class="column left"></div>
+        <div class="column right"></div>
+      </div>
+    </div>
+
   </body>
 </html>

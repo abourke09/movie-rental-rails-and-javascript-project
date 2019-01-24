@@ -2,9 +2,19 @@ class CustomersController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:new, :create]
   before_action :no_url_hacking, only: [:show, :edit, :update]
+#  skip_before_action :verify_authenticity_token , only: [:update]
+
+  def get_current_user
+    render json: current_user  
+  end
 
   def show
     @customer = Customer.find(params[:id])
+    @age_check = @customer.check_for_age
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @customer}
+    end
   end
 
   def new
@@ -28,7 +38,8 @@ class CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
-      redirect_to customer_path(@customer)
+      @customer = Customer.find(params[:id])
+      #redirect_to customer_path(@customer)
     else
       render :edit
     end

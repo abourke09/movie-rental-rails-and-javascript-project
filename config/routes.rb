@@ -22,9 +22,8 @@ Rails.application.routes.draw do
     post '/famous_quotes', to: 'famous_quotes#create'
   end
 
+  get '/famous_quotes/:id', to: 'famous_quotes#show'
+  get '/customers/:id', to: 'customers#show'
 
-
-
-
-
+  get '/get_current_user', to: 'customers#get_current_user'
 end
