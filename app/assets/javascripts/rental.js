@@ -80,11 +80,12 @@ function listenForRentClick() {
           url: url,
           data: data,
           success: function(response) {
-            rentalsNavClick()
+//            rentalsNavClick()
           }
         })
       }
     })
+  //  alert("Thank you for renting this movie! Not sure if you're old enough though...")
   })
 }
 
