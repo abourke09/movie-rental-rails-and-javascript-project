@@ -4,7 +4,6 @@ class RentalsController < ApplicationController
 
   def show
     @rental = Rental.find(params[:id])
-  #  render json: @rental, status: 200
     respond_to do |f|
       f.html {render :show}
       f.json {render json: @rental}
@@ -33,21 +32,16 @@ class RentalsController < ApplicationController
     @rental = Rental.create(
           :customer_id => params[:customer_id],
           :movie_id => params[:movie_id],
-      #    :status => "checked out"
         )
     @message = @rental.rent_movie
-
-  #  binding.pry
   #  redirect_to customer_rentals_path(@rental.customer), :notice => @message
   end
 
   def update
-    #update is used to both RE-check out movies and also return them
     @rental = Rental.find_by(id: params[:rental_id])
 
     if params[:status] == "checked out"
       @message = @rental.rent_movie
-      #rent_movie checks for age AND updates status to checked out IF old enough (also set message)
     elsif params[:status] == "returned"
       @message = "Thank you for returning #{@rental.movie.title}."
       @rental.update(:status => params[:status])
