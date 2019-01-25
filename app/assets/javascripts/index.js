@@ -62,18 +62,12 @@ function clearWhiteboard() {
 }
 
 function logOutNavClick() {
+  sessionStorage.clear();
   $.ajax({
     type: 'GET',
     url: '/logout',
     success: function(response) {
-      navbarLoggedOut();
-      sessionStorage.clear();
-      homeNavClick();
-    //  welcome_message = `
-    //    <h1>Movie Rental Homepage</h1>
-    //    <p>Welcome! Please log in or sign up by selecting one of the options from the navigation bar above.</p>`
-    //  $('div#whiteboard').html(welcome_message)
-    //  listenForNavClick()
+      homeNavClick()
     }
   })
 }
