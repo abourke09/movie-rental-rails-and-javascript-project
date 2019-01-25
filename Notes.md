@@ -2,10 +2,14 @@ Notes.md
 
 from application.js file: //= require jqueryauthenticity
 [ ] Add Facebook login
-[ ] when I log in, the welcome message doesn't display the correct message and no details load until i refresh (CUSTOMERS ID IS UNDEFINED IN URL)
+[ ] upon login, the currentUser() evaluated, but the current_user_id is still undefined. 
 [ ] When Navbar is clicked after successful login, the listener doesn't work and it loads a new page
-[ ] Figure out how to incorporate error and success messages/routing
-[ ] Check for age doesn't work anymore!!! :( :( :(
+[ ] Figure out how to incorporate error and success messages/routing:
+    - if rental is UNSUCCESSFUL (most important)- focus on Rent Button
+    - for successful rental would be nice
+    - for user profile changes?
+    - for login & signup errors
+[X] Check for age doesn't work anymore!!! :( :( :(
 [X] Instead of loading the NavBar each time, let the application.html.erb landing page include the 'not logged in' version, and shovel in the html to replace it with the 'logged in version' when a user actually logs in. Then do the reverse when someone logs out.
 [X] reroute login to root 3000
 [X] Make Rent button disappear if the customer has already rented it
@@ -20,6 +24,7 @@ from application.js file: //= require jqueryauthenticity
   [X] Log Out  
   [X] Log In
   [ ] Sign Up
+
 
   <form id="login" action="/login" method="POST">
 
