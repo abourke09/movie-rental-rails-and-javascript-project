@@ -40,17 +40,8 @@ function listenForNavClick() {
 }
 
 function homeNavClick() {
-  if (current_user_id != "undefined") {
-    welcome_message = `
-    <h1>Movie Rental Homepage</h1>
-    <p>You're inside the homeNavClick! Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>`
-  } else {
-    welcome_message = `
-    <h1>Movie Rental Homepage</h1>
-    <p>You're inside the homeNavClick! Please log in or sign up by selecting one of the options from the navigation bar above.</p>`
-  }
-  $('div#whiteboard').html(welcome_message)
   listenForNavClick()
+  location.reload(true);
 }
 
 function clearWhiteboard() {
