@@ -71,18 +71,18 @@ function logOutNavClick() {
 function signUpNavClick() {
   $('div#whiteboard').html(
     `<h1>Please Sign Up</h1>
-    <form>
+    <form id="signup" action="/signup" method="POST">
       <br><strong>Name:</strong><br>
-      <input type="text" name="name"></br>
+      <input type="text" id="name"></br>
 
       <br><strong>Age:</strong><br>
-      <input type="number" name="age"></br>
+      <input type="number" id="age"></br>
 
       <br><strong>Email:</strong><br>
-      <input type="email" name="email"></br>
+      <input type="email" id="email"></br>
 
       <br><strong>Password:</strong><br>
-      <input type="password" name="password"></br>
+      <input type="password" id="password"></br>
 
       <br><input class="signup" type="submit" value="Create Customer">
     </form>
