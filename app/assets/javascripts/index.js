@@ -61,24 +61,6 @@ function clearWhiteboard() {
   `)
 }
 
-function navbarLoggedIn() {
-  navbar_html = `
-    <a class="navbar-brand" href="/">Home</a>,
-    <a class="navbar-brand" href="/movies">All Movies</a>,
-    <a class="navbar-brand" href="/customers/${current_user_id}">My Profile</a>,
-    <a class="navbar-brand" href="/customers/${current_user_id}/rentals">My Rentals</a>,
-    <a class="navbar-brand" href="/logout">Log Out</a>`
-  $('div.navbar-header').html(navbar_html)
-}
-
-function navbarLoggedOut() {
-  navbar_html = `
-    <a class="navbar-brand" href="/">Home</a>,
-    <a class="navbar-brand" href="/signup">Sign Up</a>,
-    <a class="navbar-brand" href="/login">Log In</a>`
-  $('div.navbar-header').html(navbar_html)
-}
-
 function logOutNavClick() {
   $.ajax({
     type: 'GET',
