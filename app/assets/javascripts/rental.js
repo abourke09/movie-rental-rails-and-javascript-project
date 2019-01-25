@@ -169,14 +169,13 @@ function listenForReturnClick() {
 
 function listenForAddQuoteClick() {
   $('button.add_quote').on('click', function (event) {
-    console.log("Event from Add Quote Button Click:", event)
     $('div.column.right').html('')
     let movie_id = event.delegateTarget.dataset.movie_id
     let url = `movies/${movie_id}`
 
     $.ajax({
       url: url,
-      method: 'get',
+      method: 'GET',
       dataType: 'json',
       success: function (response) {
         let movie = new Movie(response)
