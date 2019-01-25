@@ -107,8 +107,6 @@ function logInNavClick() {
 
       <br><input class="login" type="submit" value="Log In">
     </form>
-
-    <p>Alternatively, log in with Facebook (Insert actual link later).</p>
     `
   )
   listenForLoginClick()
