@@ -1,9 +1,9 @@
 Notes.md
 
 from application.js file: //= require jqueryauthenticity
-[ ] Add Facebook login
-[ ] upon login, the currentUser() evaluated, but the current_user_id is still undefined. 
-[ ] When Navbar is clicked after successful login, the listener doesn't work and it loads a new page
+[ ] Ask Brad if I really need a Facebook login and signup page (old project requirements) Also, validation requirements?
+[ ] upon login, the currentUser() evaluated, but the current_user_id is still undefined.
+[X] When Navbar is clicked after successful login, the listener doesn't work and it loads a new page
 [ ] Figure out how to incorporate error and success messages/routing:
     - if rental is UNSUCCESSFUL (most important)- focus on Rent Button
     - for successful rental would be nice
