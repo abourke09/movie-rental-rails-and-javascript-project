@@ -46,7 +46,6 @@ function homeNavClick() {
 
 function clearWhiteboard() {
   $('div#whiteboard').html(`
-  <div id="alerts"></div>
   <div class="column left"></div>
   <div class="column right"></div>
   `)
