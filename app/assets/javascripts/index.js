@@ -116,18 +116,27 @@ $('form#signup').on('submit', function (event) {
 
 function logInNavClick() {
   $('div#whiteboard').html(
-    `<h1>Please Log In</h1>
-    <form id="login" action="/login" method="POST">
-      <input type="hidden" name="authenticity_token" value="token_value">
+    `<div class="column left">
+      <h1>Please Log In</h1>
+      <form id="login" action="/login" method="POST">
+        <input type="hidden" name="authenticity_token" value="token_value">
 
-      <br><strong>Email:</strong><br>
-      <input type="email" id="email"></br>
+        <br><strong>Email:</strong><br>
+        <input type="email" id="email"></br>
 
-      <br><strong>Password:</strong><br>
-      <input type="password" id="password"></br>
+        <br><strong>Password:</strong><br>
+        <input type="password" id="password"></br>
 
-      <br><input class="login" type="submit" value="Log In">
-    </form>
+        <br><input class="login" type="submit" value="Log In">
+      </form>
+    </div>
+    <div class="column right">
+      <div id="userinfo">
+        <h4>Demo Login Info:</h4>
+        <p>Email: csand@gmail.com</p>
+        <p>Password: password</p>
+      </div>
+    </div>
     `
   )
   listenForLoginClick()
