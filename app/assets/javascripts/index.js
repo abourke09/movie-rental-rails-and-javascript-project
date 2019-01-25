@@ -3,6 +3,12 @@ $(function (){
   listenForNavClick()
 })
 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+})
+
 function currentUser() {
   $.ajax({
     type: 'GET',
