@@ -92,9 +92,26 @@ function signUpNavClick() {
 }
 
 function listenForSignupClick() {
-  $('input.signup').on('click', function (event) {
+$('form#signup').on('submit', function (event) {
     event.preventDefault()
+    data = {'customer' : {
+        'name' : $("#name").val(),
+        'age' : $("#age").val(),
+        'email' : $("#email").val(),
+        'password' : $("#password").val()
+      }
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/signup',
+      data: data,
+      success: function(response) {
+        homeNavClick()
+      }
+    })
   })
+
 }
 
 function logInNavClick() {
