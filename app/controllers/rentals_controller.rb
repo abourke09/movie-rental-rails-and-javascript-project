@@ -36,21 +36,24 @@ class RentalsController < ApplicationController
       #    :status => "checked out"
         )
     @message = @rental.rent_movie
-    flash.now[:alert] = @message
 
   #  binding.pry
   #  redirect_to customer_rentals_path(@rental.customer), :notice => @message
   end
 
   def update
+    #update is used to both RE-check out movies and also return them
     @rental = Rental.find_by(id: params[:rental_id])
-    @rental.update(:status => params[:status])
-  #  @rental.update(:status => "returned")
-    @rental.save
-    flash[:notice] = "You're seeing the Flash Notice WOW!"
-  #  @message = "Thank you for returning #{@rental.movie.title}."
-  #  flash.now[:alert] = @message
 
+    if params[:status] == "checked out"
+      @message = @rental.rent_movie
+      #rent_movie checks for age AND updates status to checked out IF old enough (also set message)
+    elsif params[:status] == "returned"
+      @message = "Thank you for returning #{@rental.movie.title}."
+      @rental.update(:status => params[:status])
+    end
+    statement = "2nd statement"
+    @rental.save
   #  redirect_to customer_rentals_path(@rental.customer), :notice => @message
   end
 
