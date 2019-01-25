@@ -88,7 +88,6 @@ function signUpNavClick() {
 function listenForSignupClick() {
   $('input.signup').on('click', function (event) {
     event.preventDefault()
-    console.log("Event from Create Customer button click:", event)
   })
 }
 
