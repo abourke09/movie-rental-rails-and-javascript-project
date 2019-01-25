@@ -125,15 +125,8 @@ function listenForLoginClick() {
       url: '/login',
       data: data,
       success: function(response) {
-        currentUser()
-        navbarLoggedIn()
         homeNavClick()
-    //    welcome_message = `
-    //      <h1>Movie Rental Homepage</h1>
-    //      <p>Welcome! Take a look at the available movies, check out your profile page, or view your rentals by selecting an option from the navigation bar above.</p>`
-    //    $('div#whiteboard').html(welcome_message)
       }
     })
   })
-//  listenForNavClick()
 }
