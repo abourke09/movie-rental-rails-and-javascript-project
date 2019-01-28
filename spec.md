@@ -38,6 +38,7 @@ Project Repo Specs:
  - [X] Installation guide (e.g. fork and clone repo, migrate db, bundle install, etc)
  - [X] Contributors guide (e.g. file an issue, file an issue with a pull request, etc)
  - [X] Licensing statement at the bottom (e.g. This project has been licensed under the MIT open source license.)
+     
  **Repo General:**
  - [X] You have a large number of small Git commits
  - [X] Your commit messages are meaningful
