@@ -4,7 +4,6 @@ class RentalsController < ApplicationController
 
   def show
     @rental = Rental.find(params[:id])
-  #  render json: @rental, status: 200
     respond_to do |f|
       f.html {render :show}
       f.json {render json: @rental}
@@ -33,24 +32,22 @@ class RentalsController < ApplicationController
     @rental = Rental.create(
           :customer_id => params[:customer_id],
           :movie_id => params[:movie_id],
-      #    :status => "checked out"
         )
     @message = @rental.rent_movie
-    flash.now[:alert] = @message
-
-  #  binding.pry
   #  redirect_to customer_rentals_path(@rental.customer), :notice => @message
   end
 
   def update
     @rental = Rental.find_by(id: params[:rental_id])
-    @rental.update(:status => params[:status])
-  #  @rental.update(:status => "returned")
-    @rental.save
-    flash[:notice] = "You're seeing the Flash Notice WOW!"
-  #  @message = "Thank you for returning #{@rental.movie.title}."
-  #  flash.now[:alert] = @message
 
+    if params[:status] == "checked out"
+      @message = @rental.rent_movie
+    elsif params[:status] == "returned"
+      @message = "Thank you for returning #{@rental.movie.title}."
+      @rental.update(:status => params[:status])
+    end
+    statement = "2nd statement"
+    @rental.save
   #  redirect_to customer_rentals_path(@rental.customer), :notice => @message
   end
 

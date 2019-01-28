@@ -79,15 +79,14 @@ function listenForRentClick() {
           type: type,
           url: url,
           data: data,
-          success: function(response) {
-//            rentalsNavClick()
+          success: function (response) {
+            rentalsNavClick()
           }
-        })
-      }
-    })
-  //  alert("Thank you for renting this movie! Not sure if you're old enough though...")
-  })
-}
+        }) //closes Second AJAX request
+      } //closes first AJAX request Success Function
+    }) //closes first AJAX request
+  }) //closes button click event
+} //closes entire function
 
 function rentalsNavClick() {
   clearWhiteboard()
@@ -122,7 +121,6 @@ function rentalsNavClick() {
     </tbody>
   </table>
   `)
-
   $.ajax({
     url: `customers/${current_user_id}/rentals`,
     method: 'get',
@@ -171,14 +169,13 @@ function listenForReturnClick() {
 
 function listenForAddQuoteClick() {
   $('button.add_quote').on('click', function (event) {
-    console.log("Event from Add Quote Button Click:", event)
     $('div.column.right').html('')
     let movie_id = event.delegateTarget.dataset.movie_id
     let url = `movies/${movie_id}`
 
     $.ajax({
       url: url,
-      method: 'get',
+      method: 'GET',
       dataType: 'json',
       success: function (response) {
         let movie = new Movie(response)

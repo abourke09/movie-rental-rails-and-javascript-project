@@ -1,11 +1,11 @@
 class CustomersController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:new, :create]
-  before_action :no_url_hacking, only: [:show, :edit, :update]
 #  skip_before_action :verify_authenticity_token , only: [:update]
+  before_action :no_url_hacking, only: [:show, :edit, :update]
 
   def get_current_user
-    render json: current_user  
+    render json: current_user
   end
 
   def show
@@ -25,7 +25,7 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
     if @customer.save
       session[:customer_id] = @customer.id
-      redirect_to customer_path(@customer)
+    #  redirect_to customer_path(@customer)
     else
       render :new
     end
