@@ -1,22 +1,22 @@
 class Rental {
   constructor(obj) {
     this.id = obj.id
-    this.customer_id = obj.customer_id
-    this.movie_id = obj.movie_id
+    this.customerId = obj.customer_id
+    this.movieId = obj.movie_id
     this.status = obj.status
     this.title = obj.movie_details.title
     this.rating = obj.movie_details.rating
     this.length = obj.movie_details.length
-    this.lead_actor = obj.movie_details.lead_actor
+    this.leadActor = obj.movie_details.lead_actor
   }
 
   checkedOutTable() {
     return (`
           <tr>
-            <td><a href="movies/${this.movie_id}">${this.title}</a></td>
+            <td><a href="movies/${this.movieId}">${this.title}</a></td>
             <td>${this.rating}</td>
             <td>${this.length} minutes</td>
-            <td>${this.lead_actor}</td>
+            <td>${this.leadActor}</td>
             <td><button class="return" data-rental_id="${this.id}">Return Now</button></td>
           </tr>
     `)
@@ -25,11 +25,11 @@ class Rental {
   returnedTable() {
     return (`
           <tr>
-            <td><a href="movies/${this.movie_id}">${this.title}</a></td>
+            <td><a href="movies/${this.movieId}">${this.title}</a></td>
             <td>${this.rating}</td>
             <td>${this.length} minutes</td>
-            <td>${this.lead_actor}</td>
-            <td><button class="add_quote" data-movie_id="${this.movie_id}">Add a Famous Quote</button></td>
+            <td>${this.leadActor}</td>
+            <td><button class="add_quote" data-movie_id="${this.movieId}">Add a Famous Quote</button></td>
           </tr>
     `)
   }
@@ -39,12 +39,12 @@ class Rental {
 function listenForRentClick() {
   $('button.rent').on('click', function (event) {
     event.preventDefault()
-    movie_id = this.dataset.movie_id
-    currentCustomerId = document.getElementById('user-id').dataset.id
+    let this_movie_id = this.dataset.movie_id
+    let currentCustomerId = document.getElementById('user-id').dataset.id
 
     $.ajax({
       type: 'GET',
-      url: `/movies/${movie_id}`,
+      url: `/movies/${this_movie_id}`,
       dataType: 'json',
       success: function(response) {
         rentals = response.rentals
@@ -52,7 +52,7 @@ function listenForRentClick() {
         var rental_id
         var already_rented = false;
         for(var i = 0; i < rentals.length; i++) {
-            if (rentals[i].customer_id == currentCustomerId && rentals[i].status == "returned") {
+            if (rentals[i].customerId == currentCustomerId && rentals[i].status == "returned") {
                 already_rented = true;
                 rental_id = rentals[i].id;
                 break;
@@ -64,7 +64,7 @@ function listenForRentClick() {
           url = '/rentals/:id'
           data = {
               'customer_id' : currentCustomerId,
-              'movie_id' : movie_id,
+              'movie_id' : movieId,
               'rental_id' : rental_id,
               'status' : 'checked out'
           }
@@ -73,7 +73,7 @@ function listenForRentClick() {
           url = '/rentals'
           data = {
               'customer_id' : currentCustomerId,
-              'movie_id' : movie_id,
+              'movie_id' : movieId,
           }
         }
 
@@ -153,9 +153,9 @@ function listenForReturnClick() {
   $('button.return').on('click', function (event) {
     event.preventDefault()
 
-    rental_id = event.delegateTarget.dataset["rental_id"]
-    url = `/rentals/${rental_id}`
-    data = {
+    let rental_id = event.delegateTarget.dataset["rental_id"]
+    let url = `/rentals/${rental_id}`
+    let data = {
       'rental_id' : rental_id,
       'status' : 'returned'
     }
@@ -175,8 +175,8 @@ function listenForReturnClick() {
 function listenForAddQuoteClick() {
   $('button.add_quote').on('click', function (event) {
     $('div.column.right').html('')
-    let movie_id = event.delegateTarget.dataset.movie_id
-    let url = `movies/${movie_id}`
+    let this_movie_id = event.delegateTarget.dataset.movie_id
+    let url = `movies/${this_movie_id}`
 
     $.ajax({
       url: url,
