@@ -45,7 +45,6 @@ function clearWhiteboard() {
 }
 
 function logOutNavClick() {
-  sessionStorage.clear();
   $.ajax({
     type: 'GET',
     url: '/logout',
