@@ -96,7 +96,7 @@ function moviesNavClick() {
 function listenForMovieClick() {
   $('td a').on('click', function (event) {
     event.preventDefault();
-    customerId = document.getElementById('user-id').dataset.id
+    currentCustomerId = document.getElementById('user-id').dataset.id
 
     $.ajax({
       url: this.href,
@@ -110,7 +110,7 @@ function listenForMovieClick() {
 
         var displayRentButton = true;
         for(var i = 0; i < rentals.length; i++) {
-            if (rentals[i].customer_id == customerId && rentals[i].status == "checked out") {
+            if (rentals[i].customer_id == currentCustomerId && rentals[i].status == "checked out") {
                 displayRentButton = false;
                 break;
             }

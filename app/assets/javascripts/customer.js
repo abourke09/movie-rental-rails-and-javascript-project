@@ -48,10 +48,10 @@ Customer.prototype.editProfile = function () {
 }
 
 function profileNavClick() {
-  customerId = document.getElementById('user-id').dataset.id
+  currentCustomerId = document.getElementById('user-id').dataset.id
 
   $.ajax({
-    url: `customers/${customerId}`,
+    url: `customers/${currentCustomerId}`,
     method: 'get',
     dataType: 'json',
     success: function (response) {

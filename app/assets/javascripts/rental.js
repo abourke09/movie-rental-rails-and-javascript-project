@@ -40,7 +40,7 @@ function listenForRentClick() {
   $('button.rent').on('click', function (event) {
     event.preventDefault()
     movie_id = this.dataset.movie_id
-    customerId = document.getElementById('user-id').dataset.id
+    currentCustomerId = document.getElementById('user-id').dataset.id
 
     $.ajax({
       type: 'GET',
@@ -52,7 +52,7 @@ function listenForRentClick() {
         var rental_id
         var already_rented = false;
         for(var i = 0; i < rentals.length; i++) {
-            if (rentals[i].customer_id == customerId && rentals[i].status == "returned") {
+            if (rentals[i].customer_id == currentCustomerId && rentals[i].status == "returned") {
                 already_rented = true;
                 rental_id = rentals[i].id;
                 break;
@@ -63,7 +63,7 @@ function listenForRentClick() {
           type = 'GET'
           url = '/rentals/:id'
           data = {
-              'customer_id' : customerId,
+              'customer_id' : currentCustomerId,
               'movie_id' : movie_id,
               'rental_id' : rental_id,
               'status' : 'checked out'
@@ -72,7 +72,7 @@ function listenForRentClick() {
           type = 'POST'
           url = '/rentals'
           data = {
-              'customer_id' : customerId,
+              'customer_id' : currentCustomerId,
               'movie_id' : movie_id,
           }
         }
@@ -92,7 +92,7 @@ function listenForRentClick() {
 
 function rentalsNavClick() {
   clearWhiteboard()
-  customerId = document.getElementById('user-id').dataset.id
+  currentCustomerId = document.getElementById('user-id').dataset.id
 
 
   $('div.column.left').html(
@@ -127,7 +127,7 @@ function rentalsNavClick() {
   </table>
   `)
   $.ajax({
-    url: `customers/${customerId}/rentals`,
+    url: `customers/${currentCustomerId}/rentals`,
     method: 'get',
     dataType: 'json',
     success: function (response) {
