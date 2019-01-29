@@ -4,7 +4,7 @@ class Customer {
     this.name = obj.name
     this.age = obj.age
     this.email = obj.email
-    this.check_for_age = obj.check_for_age
+    this.checkForAge = obj.check_for_age
   }
 
   profileHTML() {
@@ -15,7 +15,7 @@ class Customer {
       <p>Age: ${this.age}</p>
 
       <div style="width:50%">
-        ${this.check_for_age}
+        ${this.checkForAge}
       </div>
       <br>
       <button class="edit_profile" data-customer_id="${this.id}" value="Edit Profile">Edit Profile</button>
