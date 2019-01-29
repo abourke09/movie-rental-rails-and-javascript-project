@@ -35,7 +35,6 @@ function listenForNavClick() {
 
 function homeNavClick() {
   listenForNavClick()
-  location.reload(true);
 }
 
 function clearWhiteboard() {
