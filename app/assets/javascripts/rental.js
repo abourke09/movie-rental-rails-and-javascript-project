@@ -9,31 +9,32 @@ class Rental {
     this.length = obj.movie_details.length
     this.lead_actor = obj.movie_details.lead_actor
   }
-}
 
-Rental.prototype.CheckedOutTable = function () {
-  return (`
-        <tr>
-          <td><a href="movies/${this.movie_id}">${this.title}</a></td>
-          <td>${this.rating}</td>
-          <td>${this.length} minutes</td>
-          <td>${this.lead_actor}</td>
-          <td><button class="return" data-rental_id="${this.id}">Return Now</button></td>
-        </tr>
-  `)
-}
+  checkedOutTable() {
+    return (`
+          <tr>
+            <td><a href="movies/${this.movie_id}">${this.title}</a></td>
+            <td>${this.rating}</td>
+            <td>${this.length} minutes</td>
+            <td>${this.lead_actor}</td>
+            <td><button class="return" data-rental_id="${this.id}">Return Now</button></td>
+          </tr>
+    `)
+  }
 
-Rental.prototype.ReturnedTable = function () {
-  return (`
-        <tr>
-          <td><a href="movies/${this.movie_id}">${this.title}</a></td>
-          <td>${this.rating}</td>
-          <td>${this.length} minutes</td>
-          <td>${this.lead_actor}</td>
-          <td><button class="add_quote" data-movie_id="${this.movie_id}">Add a Famous Quote</button></td>
-        </tr>
-  `)
-}
+  returnedTable() {
+    return (`
+          <tr>
+            <td><a href="movies/${this.movie_id}">${this.title}</a></td>
+            <td>${this.rating}</td>
+            <td>${this.length} minutes</td>
+            <td>${this.lead_actor}</td>
+            <td><button class="add_quote" data-movie_id="${this.movie_id}">Add a Famous Quote</button></td>
+          </tr>
+    `)
+  }
+} //closes Rental class
+
 
 function listenForRentClick() {
   $('button.rent').on('click', function (event) {
