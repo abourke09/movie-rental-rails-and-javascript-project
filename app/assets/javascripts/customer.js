@@ -6,46 +6,47 @@ class Customer {
     this.email = obj.email
     this.check_for_age = obj.check_for_age
   }
-}
 
-Customer.prototype.profileHTML = function () {
+  profileHTML() {
+    return (`
+      <h1>${this.name}'s Profile Page </h1>
 
-  return (`
-    <h1>${this.name}'s Profile Page </h1>
+      <p>Email: ${this.email}</p>
+      <p>Age: ${this.age}</p>
 
-    <p>Email: ${this.email}</p>
-    <p>Age: ${this.age}</p>
+      <div style="width:50%">
+        ${this.check_for_age}
+      </div>
+      <br>
+      <button class="edit_profile" data-customer_id="${this.id}" value="Edit Profile">Edit Profile</button>
+      `)
+  }
 
-    <div style="width:50%">
-      ${this.check_for_age}
-    </div>
-    <br>
-    <button class="edit_profile" data-customer_id="${this.id}" value="Edit Profile">Edit Profile</button>
-    `)
-}
+  editProfile() {
+    return (`
+      <h1>Edit Your Profile</h1>
+      <form id="edit_profile" data-cust_id="${this.id}" action="/customers/${this.id}" method="PATCH">
+        <input type="hidden" name="authenticity_token" value="token_value">
 
-Customer.prototype.editProfile = function () {
-  return (`
-    <h1>Edit Your Profile</h1>
-    <form id="edit_profile" data-cust_id="${this.id}" action="/customers/${this.id}" method="PATCH">
-      <input type="hidden" name="authenticity_token" value="token_value">
+        <br><strong>Name:</strong><br>
+        <input type="text" id="name" value="${this.name}"></br>
 
-      <br><strong>Name:</strong><br>
-      <input type="text" id="name" value="${this.name}"></br>
+        <br><strong>Age:</strong><br>
+        <input type="number" id="age" value="${this.age}"></br>
 
-      <br><strong>Age:</strong><br>
-      <input type="number" id="age" value="${this.age}"></br>
+        <br><strong>Email:</strong><br>
+        <input type="text" id="email" value="${this.email}"></br>
 
-      <br><strong>Email:</strong><br>
-      <input type="text" id="email" value="${this.email}"></br>
+        <br><strong>Password:</strong><br>
+        <input type="text" id="password"></br>
 
-      <br><strong>Password:</strong><br>
-      <input type="text" id="password"></br>
+        <br><input class="update_customer" type="submit" value="Update Customer">
+      </form>
+      `)
+  }
+} //closes Customer class
 
-      <br><input class="update_customer" type="submit" value="Update Customer">
-    </form>
-    `)
-}
+
 
 function profileNavClick() {
   currentCustomerId = document.getElementById('user-id').dataset.id
