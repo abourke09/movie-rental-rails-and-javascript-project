@@ -2,14 +2,14 @@ class Movie {
   constructor(obj) {
     this.id = obj.id
     this.title = obj.title
-    this.lead_actor = obj.lead_actor
+    this.leadActor = obj.lead_actor
     this.length = obj.length
     this.rating = " " + obj.rating + " "
-    this.famous_quotes = obj.famous_quotes
+    this.famousQuotes = obj.famous_quotes
   }
 
   movieHTML() {
-    let movieQuotes = this.famous_quotes.map(q => {
+    let movieQuotes = this.famousQuotes.map(q => {
       return `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
     })
 
@@ -17,7 +17,7 @@ class Movie {
       <h2>${this.title}</h2>
       <p><strong>MPAA Rating: </strong>${this.rating} </p>
       <p><strong>Length: </strong>${this.length} minutes</p>
-      <p><strong>Lead Actor: </strong>${this.lead_actor} </p>
+      <p><strong>Lead Actor: </strong>${this.leadActor} </p>
       <p><strong>Famous Quotes</strong></p>
       <div>${movieQuotes.join(' ')}</div>
       <button class="rent" data-movie_id="${this.id}" value="Rent Movie">Rent</button>
@@ -30,7 +30,7 @@ class Movie {
             <td><a href="movies/${this.id}">${this.id}. ${this.title}</a></td>
             <td>${this.rating}</td>
             <td>${this.length} minutes</td>
-            <td>${this.lead_actor}</td>
+            <td>${this.leadActor}</td>
           </tr>
     `)
   }
@@ -107,15 +107,15 @@ function listenForMovieClick() {
         $('div.column.right').html(html)
         rentals = response.rentals
 
-        var display_rent_button = true;
+        var displayRentButton = true;
         for(var i = 0; i < rentals.length; i++) {
             if (rentals[i].customer_id == current_user_id && rentals[i].status == "checked out") {
-                display_rent_button = false;
+                displayRentButton = false;
                 break;
             }
         }
 
-        if (!display_rent_button){
+        if (!displayRentButton){
          $ ('button.rent').remove()
         } else {
            listenForRentClick()
