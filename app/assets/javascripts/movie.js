@@ -7,34 +7,35 @@ class Movie {
     this.rating = " " + obj.rating + " "
     this.famous_quotes = obj.famous_quotes
   }
-}
 
-Movie.prototype.movieHTML = function () {
-  let movieQuotes = this.famous_quotes.map(q => {
-    return `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
-  })
+  movieHTML() {
+    let movieQuotes = this.famous_quotes.map(q => {
+      return `<p>"<em>${q.quote}</em>" - ${q.actor} </p> <br />`
+    })
 
-  return (`
-    <h2>${this.title}</h2>
-    <p><strong>MPAA Rating: </strong>${this.rating} </p>
-    <p><strong>Length: </strong>${this.length} minutes</p>
-    <p><strong>Lead Actor: </strong>${this.lead_actor} </p>
-    <p><strong>Famous Quotes</strong></p>
-    <div>${movieQuotes.join(' ')}</div>
-    <button class="rent" data-movie_id="${this.id}" value="Rent Movie">Rent</button>
+    return (`
+      <h2>${this.title}</h2>
+      <p><strong>MPAA Rating: </strong>${this.rating} </p>
+      <p><strong>Length: </strong>${this.length} minutes</p>
+      <p><strong>Lead Actor: </strong>${this.lead_actor} </p>
+      <p><strong>Famous Quotes</strong></p>
+      <div>${movieQuotes.join(' ')}</div>
+      <button class="rent" data-movie_id="${this.id}" value="Rent Movie">Rent</button>
+      `)
+  }
+
+  movieList() {
+    return (`
+          <tr class="content">
+            <td><a href="movies/${this.id}">${this.id}. ${this.title}</a></td>
+            <td>${this.rating}</td>
+            <td>${this.length} minutes</td>
+            <td>${this.lead_actor}</td>
+          </tr>
     `)
-}
+  }
 
-Movie.prototype.movieList = function () {
-  return (`
-        <tr class="content">
-          <td><a href="movies/${this.id}">${this.id}. ${this.title}</a></td>
-          <td>${this.rating}</td>
-          <td>${this.length} minutes</td>
-          <td>${this.lead_actor}</td>
-        </tr>
-  `)
-}
+}//closes Movie class
 
 function filterText() {
     $('div#movie-details').html('')
