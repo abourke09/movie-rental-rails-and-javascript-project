@@ -1,5 +1,4 @@
 $(function (){
-  currentUser()
   listenForNavClick()
 })
 
@@ -8,17 +7,6 @@ $.ajaxSetup({
     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
   }
 })
-
-function currentUser() {
-  $.ajax({
-    type: 'GET',
-    url: '/get_current_user',
-    success: function(response) {
-      sessionStorage.setItem("get_current_user_id", response.id)
-      }
-    })
-    current_user_id = sessionStorage.getItem("get_current_user_id")
-}
 
 function listenForNavClick() {
   $('a.navbar-brand').on('click', function (event) {
