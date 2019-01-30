@@ -1,6 +1,11 @@
  - [X] video walkthrough recorded & uploaded, blogpost finished, ReadMe finalized
- - [ ] upon login, the currentUser() evaluated, but the current_user_id is still undefined.
+ - [X] upon login, the currentUser() evaluated, but the current_user_id is still undefined. Removes current_user_id in favor of a hidden div <div id="user-id"> on application.html.erb that uses rails to automatically store <%= currentUser.id %>
  - [ ] after project review, incorporate final edits & suggestions, delete this file, commit to master, push to GitHub
+ - [ ] Project Review in three parts:
+    - [X] 1. Project Requirements Fulfilled?
+    - [ ] 2. Live Coding- add a sort button to the Movies index list using AJAX for title/length/leadActor
+    - [ ] 3. Javascript fundamentals
+- [ ] Question for Howard: what javascript plugins do you recommend for the React/Redux section? I think my defaults are causing issues with the Babel and Atom Beautify plugins I installed.
 
 Rails App with JavaScript Frontend Spec
 ======================================
