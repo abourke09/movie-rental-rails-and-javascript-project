@@ -53,13 +53,30 @@ function clearFilter() {
 		$('.content').show();
 }
 
+function sortTable(column) {
+  let table = $('div.column.left table')
+  let rows = $('div.column.left tr.content')
+
+  switching = true ;
+  dir = "asc";
+  while (switching) {
+    switching = false
+    for (i = 1; i < (rows.length - 1); i++) {
+
+    }
+  }
+
+// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sort_table_desc
+
+}
+
 function moviesNavClick() {
   $('div.column.left').html(`
     <h1>All Movies:</h1>
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <th>Title</th>
+          <th onclick="sortTable("title")">Title</th>
           <th>MPAA Rating
             <select id='filterText' style='display:inline-block' onchange='filterText()'>
               <option disabled selected>Select</option>
@@ -68,12 +85,11 @@ function moviesNavClick() {
               <option value='PG-13 '>PG-13</option>
               <option value='R '>R</option>
               <option value='NC-17 '>NC-17</option>
-
               <option value='all'>All</option>
             </select>
           </th>
-          <th>Length</th>
-          <th>Lead Actor</th>
+          <th onclick="sortTable("length")">Length</th>
+          <th onclick="sortTable("lead actor")">Lead Actor</th>
         </tr>
       </tbody>
     </table>
