@@ -136,10 +136,10 @@ function rentalsNavClick() {
       rentals.forEach(function(element) {
         if (element.status == "checked out") {
           let newRental = new Rental(element)
-          $('div.column.left tbody.checked_out').append(newRental.CheckedOutTable())
+          $('div.column.left tbody.checked_out').append(newRental.checkedOutTable())
         } else if (element.status == "returned") {
           let newRental = new Rental(element)
-          $('div.column.left tbody.returned').append(newRental.ReturnedTable())
+          $('div.column.left tbody.returned').append(newRental.returnedTable())
         }
       })
       listenForMovieClick()
