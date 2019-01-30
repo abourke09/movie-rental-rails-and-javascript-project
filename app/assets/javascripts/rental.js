@@ -39,22 +39,22 @@ class Rental {
 function listenForRentClick() {
   $('button.rent').on('click', function (event) {
     event.preventDefault()
-    let this_movie_id = this.dataset.movie_id
+    let thisMovieId = this.dataset.movie_id
     let currentCustomerId = document.getElementById('user-id').dataset.id
 
     $.ajax({
       type: 'GET',
-      url: `/movies/${this_movie_id}`,
+      url: `/movies/${thisMovieId}`,
       dataType: 'json',
       success: function(response) {
         rentals = response.rentals
 
-        var rental_id
+        var rentalId
         var already_rented = false;
         for(var i = 0; i < rentals.length; i++) {
             if (rentals[i].customerId == currentCustomerId && rentals[i].status == "returned") {
                 already_rented = true;
-                rental_id = rentals[i].id;
+                rentalId = rentals[i].id;
                 break;
             }
         }
@@ -64,8 +64,8 @@ function listenForRentClick() {
           url = '/rentals/:id'
           data = {
               'customer_id' : currentCustomerId,
-              'movie_id' : movieId,
-              'rental_id' : rental_id,
+              'movie_id' : thisMovieId,
+              'rental_id' : rentalId,
               'status' : 'checked out'
           }
         } else {
@@ -73,7 +73,7 @@ function listenForRentClick() {
           url = '/rentals'
           data = {
               'customer_id' : currentCustomerId,
-              'movie_id' : movieId,
+              'movie_id' : thisMovieId,
           }
         }
 
