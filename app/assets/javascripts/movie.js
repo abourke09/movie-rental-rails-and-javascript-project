@@ -59,7 +59,7 @@ function moviesNavClick() {
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <th onclick="sortByHeaders(0)">Title</th>
+          <th onclick="newSort()">Title</th>
           <th>MPAA Rating
             <select id='filterText' style='display:inline-block' onchange='filterText()'>
               <option disabled selected>Select</option>
@@ -92,8 +92,47 @@ function moviesNavClick() {
   })
 }
 
+function newSort() {
+  $.ajax({
+    url: '/movies',
+    method: 'get',
+    dataType: 'json',
+    success: function (response) {
+
+      response.sort( (a, b) => {
+        const ratingOne = a.rating.toUpperCase();
+        const ratingTwo = b.rating.toUpperCase();
+
+        if(ratingOne > ratingTwo) {
+          return 1
+        }
+
+        if(ratingOne < ratingTwo) {
+          return -1
+        }
+
+       const titleOne = a.title.toUpperCase();
+       const titleTwo = b.title.toUpperCase();
+
+       if(titleOne > titleTwo) {
+         return 1
+       }
+
+       if(titleOne < titleTwo) {
+         return -1
+       }
+
+        return 0
+      })
+      console.log(response)
+
+      listenForMovieClick()
+    }
+  })
+}
+
 function sortByHeaders(n) {
-  var rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   switching = true;
   dir = "asc";
 
@@ -112,7 +151,7 @@ function sortByHeaders(n) {
         thingOne = parseInt(x.innerText)
         thingTwo = parseInt(y.innerText)
       }
-      
+
       if (dir == "asc") {
         if (thingOne > thingTwo) {
           shouldSwitch= true;
